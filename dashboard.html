@@ -347,9 +347,9 @@
   <p class="eyebrow">The model</p>
   <h2>Revenue is volume times price. Price did the rescuing.</h2>
   <p class="lede">
-    Brent ran at <strong>1.67×</strong> its pre-war level through the conflict window. That multiple sets a
+    Brent ran at <strong>1.72×</strong> its pre-war level through the conflict window. That multiple sets a
     single threshold the whole market shares: an exporter's revenue rises if, and only if, it still
-    moves more than <strong>P₀/P₁ ≈ 60%</strong> of its pre-war barrels. Above the line, the price gain
+    moves more than <strong>P₀/P₁ ≈ 58%</strong> of its pre-war barrels. Above the line, the price gain
     outruns the volume loss. Below it, nothing saves you. Each exporter below is plotted twice — where its
     pipeline capacity said it <em>should</em> land, and where it actually landed.
   </p>
@@ -369,7 +369,7 @@
     <p>
       Ranked by spare bypass capacity alone — a number knowable in 2024 — the model calls the
       winner/loser split in <em>five of six</em> cases, and the structural retention rank-orders the
-      <em>size</em> of the revenue moves too (Spearman ρ = +0.87). Ranked by production scale, it calls none of them.
+      <em>size</em> of the revenue moves too (Spearman ρ = +0.74). Ranked by production scale, it calls none of them.
     </p>
   </div>
 </section>
@@ -402,10 +402,12 @@
   <div class="verdict">
     <p>
       The one miss <em>is</em> the finding. The UAE owns ADCOP, which on paper left it 76% retention —
-      comfortably above the line. It lost anyway, because rated capacity is not deliverable capacity:
-      EIA describes the UAE's real excess bypass as only <em>"limited."</em> The same wedge shrinks
-      corridor-wide deliverable spare to 2.6 mb/d against a 4.9 mb/d nameplate sum. Any resilience
-      estimate built off an infrastructure inventory will overstate what a corridor can actually absorb.
+      comfortably above the line. Its revenue fell 25% anyway (Goldman Sachs), an implied
+      <em>44%</em> realised retention: ADCOP moved ~2 mb/d in March, half its February throughput.
+      Rated capacity is not deliverable capacity — EIA calls the UAE's real excess bypass only
+      <em>"limited,"</em> the same wedge that shrinks corridor-wide deliverable spare to 2.6 mb/d against
+      a 4.9 mb/d nameplate sum. Any resilience estimate built off an infrastructure inventory will
+      overstate what a corridor can actually absorb.
     </p>
   </div>
 </section>
@@ -458,9 +460,9 @@
         Revenue <span class="mono">R = Q · P</span>. Comparing the conflict window to the pre-war
         baseline, revenue rises iff <span class="mono">Q₁/Q₀ &gt; P₀/P₁</span>. The right-hand side is the
         break-even retention rate <span class="mono">r*</span>. With
-        <span class="mono">P₀ = $64</span> (Feb 2026) and a time-weighted
-        <span class="mono">P₁ = $106.94</span> across 28 Feb – 8 May,
-        <span class="mono">r* ≈ 59.8%</span>.
+        <span class="mono">P₀ = $61</span> (the pre-conflict-risk baseline, before war
+        premium) and a time-weighted <span class="mono">P₁ = $104.73</span> across 28 Feb – 8 May,
+        <span class="mono">r* ≈ 58.2%</span>.
       </p>
       <p>
         Ex-ante retention is <span class="mono">spare bypass ÷ Hormuz volume</span>, capped at 1.
@@ -472,11 +474,14 @@
       <h3>Limits &amp; how they're handled</h3>
       <ul>
         <li>Partial equilibrium — price is exogenous to any single exporter (strong for Saudi Arabia).
-            Probed with a ±15% price sweep: the call holds; only exporters within a few points of the
-            line (Saudi, UAE) are sensitive.</li>
-        <li>Small sample. FREE Network published <em>magnitudes</em> for four exporters, so the test is
-            no longer sign-only: structural retention rank-orders the revenue moves (Spearman ρ = +0.87),
-            not just their sign. Still six observations — suggestive, not powered.</li>
+            Probed two ways: a ±15% sweep of P₁, and swapping the pre-war baseline P₀ from the
+            counterfactual $61 to the immediate pre-strike $72. The zero-bypass losers and Iran are
+            called under <em>every</em> assumption; only Saudi Arabia, sitting a few points from the
+            line, flips — its narrow +10% gain would be mis-called on the $72 baseline. That fragility
+            is shown, not hidden.</li>
+        <li>Small sample. Goldman Sachs / FREE Network published <em>magnitudes</em> for the key
+            exporters, so the test is no longer sign-only: structural retention rank-orders the revenue
+            moves (Spearman ρ = +0.74), not just their sign. Still six observations — suggestive, not powered.</li>
         <li>Realised retention is <em>derived</em> from reported revenue (Q₁/Q₀ = revenue index ÷ price
             index), replacing the earlier guessed output cuts. Baseline caveat: the revenue window and the
             price baseline differ slightly, so implied retention is indicative.</li>
@@ -495,8 +500,8 @@
         <li>EIA — <em>Strait of Hormuz</em> chokepoint brief (2024): Saudi 38%/5.5 mb/d, 84% to Asia,
             combined deliverable bypass 2.6 mb/d</li>
         <li>Wikipedia — <em>2026 Strait of Hormuz crisis</em>: $100 on 8 Mar, ~$126 peak, closure phases</li>
-        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, and Vulnerabilities</em>, 20 Mar 2026
-            (revenue magnitudes)</li>
+        <li>Goldman Sachs, via Bloomberg — per-country revenue changes (Saudi +10%, Oman +80%,
+            UAE −25%); FREE Network (20 Mar 2026) — Iraq −76%, Kuwait −73%</li>
         <li>CRS — <em>Iran Conflict and the Strait of Hormuz</em> (R45281)</li>
         <li>S&amp;P Global; Al Jazeera; NPR — pipeline capacity, prices, and the 17 Jun memorandum</li>
       </ul>
@@ -748,7 +753,9 @@ draw("pre");
     if (!e.hit_exante) {
       const m = el("text", { x: x(e.structural_retention) + 14, y: yy - 12, class: "lbl" });
       m.setAttribute("fill", "#E8A33D");
-      m.textContent = `rated ${pct(e.structural_retention)} · realised “limited” · lost`;
+      m.textContent = hasReal
+        ? `rated ${pct(e.structural_retention)} → realised ${pct(e.observed_retention)} · lost`
+        : `rated ${pct(e.structural_retention)} · lost`;
       svg.appendChild(m);
     }
   });

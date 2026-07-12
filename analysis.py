@@ -148,7 +148,13 @@ print(f"       same 'rated != real' failure the UAE case exposes, at corridor sc
 # ----------------------------------------------------------------------------
 # 4. THE BREAK-EVEN LINE
 # ----------------------------------------------------------------------------
-p0 = float(brent.loc[brent.date == "2026-02-15", "brent_usd"].iloc[0])
+# P0 is the but-for, no-closure price. The Jan-Feb rise from $61 to $72 was
+# itself war-risk repricing (anticipation of this closure), so the correct
+# counterfactual baseline is the pre-conflict-risk level (~$61, early Jan), not
+# the immediate pre-strike price ($72, which already embeds the war premium).
+# Section [5d] shows how the call moves if you use the $72 baseline instead.
+p0 = float(brent.loc[brent.date == "2026-01-15", "brent_usd"].iloc[0])
+p0_prestrike = float(brent.loc[brent.date == "2026-02-28", "brent_usd"].iloc[0])
 
 war = brent[(brent.date >= WAR_WINDOW[0]) & (brent.date <= WAR_WINDOW[1])].copy()
 # Time-weight the conflict-window price by days between observations, so a
@@ -281,17 +287,28 @@ if len(miss):
 # ----------------------------------------------------------------------------
 # Partial-equilibrium caveat: price is treated as exogenous to any single
 # exporter (a strong assumption for Saudi Arabia, which is large enough to move
-# it). We probe robustness by sweeping the conflict-window price +/- 15% and
-# checking whether the winner/loser calls flip.
+# it). Two robustness probes:
+#   (i)  sweep the conflict-window price P1 +/- 15%;
+#   (ii) swap the pre-war baseline P0 from the counterfactual $61 to the
+#        immediate pre-strike $72 -- the single most consequential assumption.
 print(f"\n[5d] SENSITIVITY OF THE BREAK-EVEN LINE")
 for factor in (0.85, 1.0, 1.15):
     rs = p0 / (p1 * factor)
     calls = np.where(tested.structural_retention > rs, "up", "down")
     hits = int((calls == tested.actual).sum())
-    print(f"    P1 x {factor:.2f}  (${p1*factor:5.1f}) -> r* = {rs:4.1%} -> "
+    print(f"    P1 x {factor:.2f}  (${p1*factor:6.1f}) -> r* = {rs:4.1%} -> "
           f"ex-ante {hits}/{n} correct")
-print(f"    The call is stable across a +/-15% price band: only exporters sitting")
-print(f"    within a few points of the line are sensitive to it (Saudi, UAE).")
+print(f"    ---")
+for base, label in ((p0, "counterfactual $61"), (p0_prestrike, "pre-strike $72")):
+    rs = base / p1
+    calls = np.where(tested.structural_retention > rs, "up", "down")
+    hits = int((calls == tested.actual).sum())
+    print(f"    P0 = {label:<18} -> r* = {rs:4.1%} -> ex-ante {hits}/{n} correct")
+print(f"    The zero-bypass losers (Iraq, Kuwait, Qatar) and Iran are called under")
+print(f"    every assumption. Only Saudi Arabia -- which sits within a few points of")
+print(f"    the line -- is sensitive to the baseline: on the pre-strike $72 baseline")
+print(f"    its narrow +10% gain would have been mis-called ex-ante. That fragility")
+print(f"    IS the partial-equilibrium limit, made explicit rather than hidden.")
 
 
 # ----------------------------------------------------------------------------
