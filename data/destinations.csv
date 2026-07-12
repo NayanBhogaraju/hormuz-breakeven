@@ -1,0 +1,9 @@
+destination,region,hormuz_crude_mbd,share_of_own_crude_imports_pct,strategic_inventory_mb,source_note
+China,Asia,5.4,47,1541,"EIA Q1-2025 destination flows; China net crude imports 11.5 mbd (2025); inventory EIA Global Energy Security Data Q1-2026"
+India,Asia,2.1,44,250,"EIA Q1-2025; India net crude imports ~4.8 mbd; inventory FREE Network Jan-2026"
+South Korea,Asia,1.7,70,,"EIA Q1-2025; ~70% of crude imports via Hormuz (ORF/Forbes). Inventory not in dataset"
+Japan,Asia,1.6,74,,"EIA Q1-2025; 70-74% of crude imports transit Hormuz. Inventory not in dataset"
+Other Asia,Asia,1.9,,,"Residual to reach 89.2% Asia share (Visual Capitalist/EIA)"
+Europe,Europe,0.8,8,1285,"EIA Q1-2025; OECD Europe inventory FREE Network Jan-2026"
+United States,North America,0.4,2,1700,"EIA: ~0.4-0.5 mbd, ~2% of US petroleum liquids consumption; SPR+commercial"
+Other,Other,0.3,,,"Residual"

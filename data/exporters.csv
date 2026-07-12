@@ -1,0 +1,8 @@
+country,hormuz_share_pct,bypass_pipeline,bypass_capacity_mbd,bypass_spare_mbd,observed_output_cut_pct,source_note
+Saudi Arabia,37.2,East-West (Petroline),5.0,3.5,20,"EIA/Vortexa Q1-2025 share; IEA 2026 bypass range 3.5-5.5 mbd combined KSA+UAE"
+Iraq,22.8,none,0.0,0.0,70,"EIA/Vortexa Q1-2025; no operational bypass (Kirkuk-Ceyhan not Gulf-connected)"
+United Arab Emirates,12.9,ADCOP (Habshan-Fujairah),1.8,1.4,55,"EIA/Vortexa Q1-2025; ADCOP nameplate 1.8 mbd, partially pre-utilised"
+Iran,10.6,none,0.0,0.0,0,"EIA/Vortexa Q1-2025; retained strait access as the controlling party"
+Kuwait,10.1,none,0.0,0.0,60,"EIA/Vortexa Q1-2025; no bypass infrastructure"
+Qatar,5.0,none,0.0,0.0,65,"Residual of top-5 (93.6%); crude/condensate only. LNG force majeure declared separately"
+Bahrain and other,1.4,none,0.0,0.0,60,"Residual"

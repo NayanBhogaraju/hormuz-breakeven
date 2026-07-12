@@ -1,0 +1,10 @@
+country,role,revenue_change_usd_bn,direction_observed,source_note
+United States,Non-Gulf exporter,50,up,"NYT analysis: war start to 8 May 2026 vs same period a year earlier"
+Russia,Non-Gulf exporter,15,up,"NYT: steady exports, >$15bn revenue increase"
+Saudi Arabia,Gulf - has bypass,,up,"NYT: revenue up via Red Sea pipeline re-routing despite export decline"
+Oman,Gulf - outside strait,,up,"NYT: avoided bottleneck by geography"
+Iran,Gulf - controls strait,,up,"NYT: retained strait access, revenue increased"
+Iraq,Gulf - no bypass,,down,"NYT: revenue declined"
+Kuwait,Gulf - no bypass,,down,"NYT: revenue declined"
+Qatar,Gulf - no bypass,,down,"NYT: revenue declined; QatarEnergy force majeure"
+United Arab Emirates,Gulf - partial bypass,,down,"NYT: revenue declined despite ADCOP"

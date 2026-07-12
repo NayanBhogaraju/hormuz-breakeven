@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hormuz Break-Even Line — 2026 Strait of Hormuz Crisis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Admiralty chart palette: deep water, buff land, hydrographic magenta */
+    --ink:      #0B1A23;
+    --ink-2:    #102733;
+    --ink-3:    #17323F;
+    --buff:     #D9C89E;
+    --paper:    #EDE6D6;
+    --sounding: #7FA3B0;
+    --magenta:  #E63980;   /* chart ink for cautions + restricted areas */
+    --crude:    #E8A33D;
+    --gain:     #57C6A9;
+    --hair:     rgba(127,163,176,.22);
+
+    --serif: "Spectral", Georgia, serif;
+    --sans:  "IBM Plex Sans", system-ui, sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    /* bathymetric hairlines: the chart grid */
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 79px, var(--hair) 79px 80px),
+      repeating-linear-gradient(90deg, transparent 0 79px, var(--hair) 79px 80px);
+    background-attachment:fixed;
+  }
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+  /* sea features are labelled in italic serif on a real chart. land in roman. */
+  .eyebrow{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:300;
+    font-size:15px;
+    letter-spacing:.04em;
+    color:var(--sounding);
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"— ";opacity:.5}
+
+  .mono{font-family:var(--mono)}
+
+  /* ---------- masthead ---------- */
+  header{padding:82px 0 54px;position:relative}
+  .rule{height:1px;background:var(--hair);margin:0}
+
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(40px,6.4vw,74px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin-bottom:22px;
+  }
+  h1 em{font-style:italic;font-weight:300;color:var(--magenta)}
+
+  .standfirst{
+    font-size:19px;
+    max-width:62ch;
+    color:#C4C8C2;
+    font-weight:300;
+  }
+  .standfirst strong{color:var(--paper);font-weight:500}
+
+  .byline{
+    margin-top:30px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--sounding);
+  }
+  .byline span{opacity:.5}
+
+  /* ---------- soundings row (the key numbers, set like depth soundings) ---------- */
+  .soundings{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--hair);
+    border-top:1px solid var(--hair);
+    border-bottom:1px solid var(--hair);
+    margin:56px 0 0;
+  }
+  .sounding{background:var(--ink);padding:26px 22px}
+  .sounding .v{
+    font-family:var(--mono);
+    font-size:34px;
+    font-weight:500;
+    letter-spacing:-.02em;
+    line-height:1;
+    color:var(--paper);
+  }
+  .sounding .v small{font-size:16px;opacity:.55;margin-left:2px}
+  .sounding .k{
+    margin-top:9px;
+    font-size:12.5px;
+    color:var(--sounding);
+    line-height:1.45;
+  }
+  .sounding.hz .v{color:var(--magenta)}
+
+  /* ---------- sections ---------- */
+  section{padding:78px 0;border-bottom:1px solid var(--hair)}
+  h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(27px,3.4vw,38px);
+    letter-spacing:-.015em;
+    line-height:1.12;
+    margin-bottom:16px;
+  }
+  .lede{max-width:66ch;color:#C4C8C2;font-size:16.5px;margin-bottom:34px}
+  .lede strong{color:var(--paper);font-weight:500}
+
+  /* ---------- signature: the chokepoint ribbon ---------- */
+  .toggle{
+    display:inline-flex;
+    border:1px solid var(--hair);
+    margin-bottom:26px;
+  }
+  .toggle button{
+    background:none;
+    border:none;
+    color:var(--sounding);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+    padding:10px 20px;
+    cursor:pointer;
+    transition:background .28s, color .28s;
+  }
+  .toggle button:hover{color:var(--paper)}
+  .toggle button[aria-pressed="true"]{background:var(--magenta);color:#0B1A23;font-weight:500}
+  .toggle button:focus-visible{outline:2px solid var(--paper);outline-offset:-2px}
+
+  .ribbon-frame{
+    border:1px solid var(--hair);
+    background:linear-gradient(180deg, var(--ink-2), var(--ink));
+    padding:8px;
+  }
+  svg{display:block;width:100%;height:auto}
+
+  .flow{transition:d .95s cubic-bezier(.4,0,.2,1), opacity .7s}
+  .lbl{font-family:var(--mono);font-size:10.5px;fill:var(--sounding);letter-spacing:.06em}
+  .lbl-v{font-family:var(--mono);font-size:12px;fill:var(--paper);font-weight:500}
+  .sea-lbl{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--sounding)}
+
+  .readout{
+    display:flex;
+    gap:36px;
+    flex-wrap:wrap;
+    margin-top:22px;
+    font-family:var(--mono);
+    font-size:12.5px;
+  }
+  .readout div span{color:var(--sounding)}
+  .readout div b{font-weight:500}
+
+  /* ---------- break-even chart ---------- */
+  .chart-frame{border:1px solid var(--hair);background:var(--ink-2);padding:26px 18px 12px}
+
+  .legend{
+    display:flex;gap:26px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11px;
+    color:var(--sounding);margin-top:20px;
+    letter-spacing:.04em;
+  }
+  .legend i{display:inline-block;width:9px;height:9px;margin-right:7px;vertical-align:middle}
+  .sw-hollow{border:1.5px solid var(--sounding);border-radius:50%;background:none}
+  .sw-gain{background:var(--gain);border-radius:50%}
+  .sw-loss{background:var(--magenta);border-radius:50%}
+
+  /* ---------- verdict / callout ---------- */
+  .verdict{
+    border-left:2px solid var(--magenta);
+    padding:6px 0 6px 26px;
+    margin:40px 0 0;
+    max-width:70ch;
+  }
+  .verdict p{font-family:var(--serif);font-size:20px;line-height:1.5;font-weight:300}
+  .verdict p em{color:var(--magenta);font-style:italic}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{
+    text-align:left;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--sounding);
+    font-weight:400;
+    padding:0 14px 12px 0;
+    border-bottom:1px solid var(--hair);
+  }
+  th.n,td.n{text-align:right}
+  td{padding:13px 14px 13px 0;border-bottom:1px solid rgba(127,163,176,.1)}
+  td.mono{font-family:var(--mono);font-size:13px}
+  tr.up td:first-child{box-shadow:inset 2px 0 0 var(--gain)}
+  tr.down td:first-child{box-shadow:inset 2px 0 0 var(--magenta)}
+  tr.up td:first-child,tr.down td:first-child{padding-left:14px}
+  .tag{
+    font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;
+  }
+  .tag.up{color:var(--gain)}
+  .tag.down{color:var(--magenta)}
+  .miss{color:var(--crude);font-family:var(--mono);font-size:10px;letter-spacing:.08em}
+
+  /* ---------- timeline ---------- */
+  .tl-frame{border:1px solid var(--hair);background:var(--ink-2);padding:22px 18px 8px}
+
+  /* ---------- exposure bars ---------- */
+  .exp{display:grid;gap:2px}
+  .exp-row{
+    display:grid;
+    grid-template-columns:130px 1fr 62px;
+    align-items:center;
+    gap:16px;
+    padding:11px 0;
+    border-bottom:1px solid rgba(127,163,176,.1);
+  }
+  .exp-row .nm{font-size:14px}
+  .exp-bar{height:9px;background:rgba(127,163,176,.13);position:relative;overflow:hidden}
+  .exp-bar i{
+    position:absolute;inset:0 auto 0 0;
+    background:var(--magenta);
+    width:0;
+    transition:width 1.1s cubic-bezier(.4,0,.2,1);
+  }
+  .exp-row .sc{font-family:var(--mono);font-size:13px;text-align:right}
+  .exp-row .sub{font-family:var(--mono);font-size:10.5px;color:var(--sounding)}
+
+  /* ---------- notes ---------- */
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .note h3{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--sounding);font-weight:400;margin-bottom:14px;
+  }
+  .note p,.note li{font-size:13.5px;color:#AFB6B4;line-height:1.65}
+  .note ul{list-style:none}
+  .note li{padding-left:15px;position:relative;margin-bottom:7px}
+  .note li::before{content:"·";position:absolute;left:2px;color:var(--sounding)}
+  .note a{color:var(--sounding)}
+
+  footer{padding:52px 0 78px;font-family:var(--mono);font-size:11px;color:var(--sounding);letter-spacing:.06em}
+
+  @media (max-width:860px){
+    .soundings{grid-template-columns:repeat(2,1fr)}
+    .cols{grid-template-columns:1fr;gap:34px}
+    .exp-row{grid-template-columns:104px 1fr 50px;gap:11px}
+    header{padding:56px 0 40px}
+    section{padding:56px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- ═══════════════════ MASTHEAD ═══════════════════ -->
+<header>
+  <p class="eyebrow">Strait of Hormuz · 26°34′N 56°15′E · closed to shipping since 4 March 2026</p>
+  <h1>The Hormuz<br><em>break-even line</em></h1>
+  <p class="standfirst">
+    When the strait shut, every Gulf exporter lost barrels. Only some lost money.
+    Saudi Arabia is the largest exporter through Hormuz and its oil revenue <strong>rose</strong>.
+    The UAE is the third largest and its revenue <strong>fell</strong>. Production scale explains
+    nothing about who survived. One variable, fixed years before the war, explains almost all of it.
+  </p>
+  <p class="byline">
+    Nayan Bhogaraju &nbsp;<span>/</span>&nbsp; Trade-flow analysis
+    &nbsp;<span>/</span>&nbsp; Data: EIA · IEA · Vortexa · NYT &nbsp;<span>/</span>&nbsp; 12 July 2026
+  </p>
+
+  <div class="soundings" id="soundings"></div>
+</header>
+
+<!-- ═══════════════════ SIGNATURE: THE RIBBON ═══════════════════ -->
+<section>
+  <p class="eyebrow">The chokepoint, to scale</p>
+  <h2>Fourteen million barrels a day, one aperture</h2>
+  <p class="lede">
+    Crude and condensate from seven exporters converge on a four-mile-wide shipping lane and fan out
+    to Asia. Two countries own pipelines that reach open water without using it. Everyone else has
+    <strong>no route out of the Gulf at all</strong>. Switch the state below to see what the closure
+    physically did to the flow.
+  </p>
+
+  <div class="toggle" role="group" aria-label="Flow state">
+    <button id="btn-pre"  aria-pressed="true">Pre-war · Q1 2025</button>
+    <button id="btn-war" aria-pressed="false">Closure · Mar 2026</button>
+  </div>
+
+  <div class="ribbon-frame">
+    <svg id="ribbon" viewBox="0 0 1080 470" role="img"
+         aria-label="Flow diagram of crude oil through the Strait of Hormuz, exporters left, destinations right">
+      <defs>
+        <linearGradient id="gCrude" x1="0" x2="1">
+          <stop offset="0"   stop-color="#E8A33D" stop-opacity=".30"/>
+          <stop offset=".48" stop-color="#E8A33D" stop-opacity=".80"/>
+          <stop offset="1"   stop-color="#E8A33D" stop-opacity=".30"/>
+        </linearGradient>
+        <linearGradient id="gBypass" x1="0" x2="1">
+          <stop offset="0" stop-color="#57C6A9" stop-opacity=".30"/>
+          <stop offset="1" stop-color="#57C6A9" stop-opacity=".75"/>
+        </linearGradient>
+        <linearGradient id="gStrand" x1="0" x2="1">
+          <stop offset="0" stop-color="#E63980" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#E63980" stop-opacity=".10"/>
+        </linearGradient>
+      </defs>
+      <g id="r-flows"></g>
+      <g id="r-strait"></g>
+      <g id="r-labels"></g>
+    </svg>
+  </div>
+
+  <div class="readout" id="readout"></div>
+</section>
+
+<!-- ═══════════════════ THE FINDING ═══════════════════ -->
+<section>
+  <p class="eyebrow">The model</p>
+  <h2>Revenue is volume times price. Price did the rescuing.</h2>
+  <p class="lede">
+    Brent ran at <strong>1.59×</strong> its pre-war level through the conflict window. That multiple sets a
+    single threshold the whole market shares: an exporter's revenue rises if, and only if, it still
+    moves more than <strong>P₀/P₁ = 62.9%</strong> of its pre-war barrels. Above the line, the price gain
+    outruns the volume loss. Below it, nothing saves you. Each exporter below is plotted twice — where its
+    pipeline capacity said it <em>should</em> land, and where it actually landed.
+  </p>
+
+  <div class="chart-frame">
+    <svg id="breakeven" viewBox="0 0 1080 400" role="img"
+         aria-label="Retention rate versus the 62.9% break-even line, by exporter"></svg>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw-hollow"></i>Predicted from spare pipeline capacity</span>
+    <span><i class="sw-gain"></i>Observed — revenue rose</span>
+    <span><i class="sw-loss"></i>Observed — revenue fell</span>
+  </div>
+
+  <div class="verdict">
+    <p>
+      Ranked by spare bypass capacity alone — a number knowable in 2024 — the model calls the
+      winner/loser split in <em>five of six</em> cases. Ranked by production scale, it calls none of them.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════ THE TABLE ═══════════════════ -->
+<section>
+  <p class="eyebrow">Test</p>
+  <h2>Prediction against outcome</h2>
+  <p class="lede">
+    Observed revenue direction is from the <strong>New York Times</strong> trade-flow analysis comparing
+    the war window to the same period a year earlier. The ex-ante column uses only pipeline data.
+    The ex-post column uses realised output — it is an accounting check, not a forecast.
+  </p>
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th>Exporter</th>
+        <th>Bypass route</th>
+        <th class="n">Hormuz crude</th>
+        <th class="n">Spare bypass</th>
+        <th class="n">Retention (rated)</th>
+        <th class="n">Retention (real)</th>
+        <th>Ex-ante</th>
+        <th>Observed</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="verdict">
+    <p>
+      The one miss <em>is</em> the finding. The UAE owns ADCOP, which on paper left it 76% retention —
+      comfortably above the line. It lost anyway, landing at 45%, because rated capacity is not
+      deliverable capacity. Any resilience estimate built off an infrastructure inventory will
+      overstate what a corridor can actually absorb.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════ TIMELINE ═══════════════════ -->
+<section>
+  <p class="eyebrow">Price and transit, January – July 2026</p>
+  <h2>The shock, and the truce that didn't hold</h2>
+  <p class="lede">
+    Brent peaked at <strong>$116</strong> on 30 March. The 17 June memorandum of understanding brought it
+    back to pre-war levels within a fortnight. Then three merchant ships were struck on 7 July and
+    transits collapsed again — the current $76.58 sits on a corridor that is still, functionally, shut.
+  </p>
+  <div class="tl-frame">
+    <svg id="timeline" viewBox="0 0 1080 340" role="img"
+         aria-label="Brent crude price and Strait of Hormuz transit volume, January to July 2026"></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════ EXPOSURE ═══════════════════ -->
+<section>
+  <p class="eyebrow">The other side of the strait</p>
+  <h2>Who is on the receiving end</h2>
+  <p class="lede">
+    <strong>89.4%</strong> of Hormuz crude goes to Asia. Exposure below combines how much of a country's
+    crude arrives through the strait with how long its stockpile could replace those specific barrels.
+    India scores near the top not because it is the most dependent, but because it holds
+    <strong>250 mb</strong> against China's 1,541.
+  </p>
+  <div class="exp" id="exposure"></div>
+  <div class="verdict">
+    <p>
+      Japan (<em>74%</em> of crude via Hormuz) and South Korea (<em>70%</em>) are more dependent than
+      anything scored here. Neither publishes inventory data in this dataset, so both are excluded
+      rather than imputed — the gap is left visible on purpose.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════ NOTES ═══════════════════ -->
+<section style="border-bottom:none">
+  <p class="eyebrow">Method and limits</p>
+  <h2>What this does and doesn't establish</h2>
+  <div class="cols">
+    <div class="note">
+      <h3>Model</h3>
+      <p style="margin-bottom:14px">
+        Revenue <span class="mono">R = Q · P</span>. Comparing the conflict window to the pre-war
+        baseline, revenue rises iff <span class="mono">Q₁/Q₀ &gt; P₀/P₁</span>. The right-hand side is the
+        break-even retention rate <span class="mono">r*</span>. With
+        <span class="mono">P₀ = $64</span> (Feb 2026) and a time-weighted
+        <span class="mono">P₁ = $101.70</span> across 28 Feb – 8 May,
+        <span class="mono">r* = 62.9%</span>.
+      </p>
+      <p>
+        Ex-ante retention is <span class="mono">spare bypass ÷ Hormuz volume</span>, capped at 1.
+        Iran is set to 1 — it controlled the strait it was closing. Time-weighting matters: a
+        three-day spike should not count the same as a five-week plateau.
+      </p>
+    </div>
+    <div class="note">
+      <h3>Limits</h3>
+      <ul>
+        <li>Partial equilibrium. Price is treated as exogenous to any single exporter, which is a
+            strong assumption for Saudi Arabia.</li>
+        <li>Revenue direction is directional only. The NYT reports signs for Gulf states, not
+            magnitudes, so the test is a sign test on six observations — suggestive, not powered.</li>
+        <li>Output-cut estimates are trade-press figures, not audited production data.</li>
+        <li>Crude and condensate only. LNG (Qatar's force majeure) and refined products move on
+            different economics and would change Qatar's picture.</li>
+        <li>Bypass "spare" capacity is the IEA's 3.5–5.5 mb/d range, midpoint-allocated. The UAE
+            result is sensitive to this allocation — which is precisely the point.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cols" style="margin-top:44px">
+    <div class="note">
+      <h3>Sources</h3>
+      <ul>
+        <li>EIA — <em>Global Energy Security Data</em>, Q1 2026; Hormuz chokepoint briefs (Vortexa tanker tracking)</li>
+        <li>IEA — <em>Strait of Hormuz</em> factsheet; Oil Market Report, March 2026</li>
+        <li>New York Times — trade-flow analysis, war start to 8 May 2026</li>
+        <li>CRS — <em>Iran Conflict and the Strait of Hormuz</em> (R45281)</li>
+        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, Vulnerabilities</em>, March 2026</li>
+      </ul>
+    </div>
+    <div class="note">
+      <h3>Reproduce</h3>
+      <p>
+        <span class="mono">python analysis.py</span> regenerates every figure on this page from the
+        four CSVs in <span class="mono">data/</span>. Each row carries its own source note.
+        No number here is entered by hand.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built as a replication-grade trade-flow exercise. Figures reflect reporting as of 12 July 2026;
+  the corridor remains contested and the data will move.
+</footer>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   Data — emitted by analysis.py → output/results.json
+   ══════════════════════════════════════════════════════════════════ */
+const R = {
+"meta": {
+"title": "The Hormuz Break-Even Line",
+"window": {
+"pre_war": "2026-02-15",
+"conflict": [
+"2026-02-28",
+"2026-05-08"
+]
+},
+"generated": "2026-07-12"
+},
+"headline": {
+"break_even_retention": 0.6293,
+"price_multiple": 1.589,
+"p0": 64.0,
+"p1": 101.7,
+"bypass_gap_mbd": 9.3,
+"bypass_cover": 0.3451,
+"hhi": 2311.0,
+"accuracy_exante": "5/6",
+"accuracy_expost": "6/6",
+"hormuz_crude_mbd": 14.2,
+"hormuz_total_mbd": 20.1,
+"asia_share": 0.8944
+},
+"exporters": [
+{
+"country": "Saudi Arabia",
+"hormuz_share_pct": 37.2,
+"hormuz_mbd": 5.2824,
+"bypass_pipeline": "East-West (Petroline)",
+"bypass_spare_mbd": 3.5,
+"structural_retention": 0.6625776162,
+"observed_retention": 0.8,
+"exante_index": 1.0528772433,
+"expost_index": 1.27125,
+"pred_exante": "up",
+"pred_expost": "up",
+"actual": "up",
+"hit_exante": true,
+"hit_expost": true
+},
+{
+"country": "Iraq",
+"hormuz_share_pct": 22.8,
+"hormuz_mbd": 3.2376,
+"bypass_pipeline": "none",
+"bypass_spare_mbd": 0.0,
+"structural_retention": 0.0,
+"observed_retention": 0.3,
+"exante_index": 0.0,
+"expost_index": 0.47671875,
+"pred_exante": "down",
+"pred_expost": "down",
+"actual": "down",
+"hit_exante": true,
+"hit_expost": true
+},
+{
+"country": "United Arab Emirates",
+"hormuz_share_pct": 12.9,
+"hormuz_mbd": 1.8318,
+"bypass_pipeline": "ADCOP (Habshan-Fujairah)",
+"bypass_spare_mbd": 1.4,
+"structural_retention": 0.7642755759,
+"observed_retention": 0.45,
+"exante_index": 1.2144816574,
+"expost_index": 0.715078125,
+"pred_exante": "up",
+"pred_expost": "down",
+"actual": "down",
+"hit_exante": false,
+"hit_expost": true
+},
+{
+"country": "Iran",
+"hormuz_share_pct": 10.6,
+"hormuz_mbd": 1.5052,
+"bypass_pipeline": "none",
+"bypass_spare_mbd": 0.0,
+"structural_retention": 1.0,
+"observed_retention": 1.0,
+"exante_index": 1.5890625,
+"expost_index": 1.5890625,
+"pred_exante": "up",
+"pred_expost": "up",
+"actual": "up",
+"hit_exante": true,
+"hit_expost": true
+},
+{
+"country": "Kuwait",
+"hormuz_share_pct": 10.1,
+"hormuz_mbd": 1.4342,
+"bypass_pipeline": "none",
+"bypass_spare_mbd": 0.0,
+"structural_retention": 0.0,
+"observed_retention": 0.4,
+"exante_index": 0.0,
+"expost_index": 0.635625,
+"pred_exante": "down",
+"pred_expost": "down",
+"actual": "down",
+"hit_exante": true,
+"hit_expost": true
+},
+{
+"country": "Qatar",
+"hormuz_share_pct": 5.0,
+"hormuz_mbd": 0.71,
+"bypass_pipeline": "none",
+"bypass_spare_mbd": 0.0,
+"structural_retention": 0.0,
+"observed_retention": 0.35,
+"exante_index": 0.0,
+"expost_index": 0.556171875,
+"pred_exante": "down",
+"pred_expost": "down",
+"actual": "down",
+"hit_exante": true,
+"hit_expost": true
+},
+{
+"country": "Bahrain and other",
+"hormuz_share_pct": 1.4,
+"hormuz_mbd": 0.1988,
+"bypass_pipeline": "none",
+"bypass_spare_mbd": 0.0,
+"structural_retention": 0.0,
+"observed_retention": 0.4,
+"exante_index": 0.0,
+"expost_index": 0.635625,
+"pred_exante": "down",
+"pred_expost": "down",
+"actual": null,
+"hit_exante": false,
+"hit_expost": false
+}
+],
+"destinations": [
+{
+"destination": "China",
+"region": "Asia",
+"hormuz_crude_mbd": 5.4,
+"share_of_own_crude_imports_pct": 47.0,
+"strategic_inventory_mb": 1541.0,
+"source_note": "EIA Q1-2025 destination flows; China net crude imports 11.5 mbd (2025); inventory EIA Global Energy Security Data Q1-2026"
+},
+{
+"destination": "India",
+"region": "Asia",
+"hormuz_crude_mbd": 2.1,
+"share_of_own_crude_imports_pct": 44.0,
+"strategic_inventory_mb": 250.0,
+"source_note": "EIA Q1-2025; India net crude imports ~4.8 mbd; inventory FREE Network Jan-2026"
+},
+{
+"destination": "South Korea",
+"region": "Asia",
+"hormuz_crude_mbd": 1.7,
+"share_of_own_crude_imports_pct": 70.0,
+"strategic_inventory_mb": null,
+"source_note": "EIA Q1-2025; ~70% of crude imports via Hormuz (ORF/Forbes). Inventory not in dataset"
+},
+{
+"destination": "Japan",
+"region": "Asia",
+"hormuz_crude_mbd": 1.6,
+"share_of_own_crude_imports_pct": 74.0,
+"strategic_inventory_mb": null,
+"source_note": "EIA Q1-2025; 70-74% of crude imports transit Hormuz. Inventory not in dataset"
+},
+{
+"destination": "Other Asia",
+"region": "Asia",
+"hormuz_crude_mbd": 1.9,
+"share_of_own_crude_imports_pct": null,
+"strategic_inventory_mb": null,
+"source_note": "Residual to reach 89.2% Asia share (Visual Capitalist/EIA)"
+},
+{
+"destination": "Europe",
+"region": "Europe",
+"hormuz_crude_mbd": 0.8,
+"share_of_own_crude_imports_pct": 8.0,
+"strategic_inventory_mb": 1285.0,
+"source_note": "EIA Q1-2025; OECD Europe inventory FREE Network Jan-2026"
+},
+{
+"destination": "United States",
+"region": "North America",
+"hormuz_crude_mbd": 0.4,
+"share_of_own_crude_imports_pct": 2.0,
+"strategic_inventory_mb": 1700.0,
+"source_note": "EIA: ~0.4-0.5 mbd, ~2% of US petroleum liquids consumption; SPR+commercial"
+},
+{
+"destination": "Other",
+"region": "Other",
+"hormuz_crude_mbd": 0.3,
+"share_of_own_crude_imports_pct": null,
+"strategic_inventory_mb": null,
+"source_note": "Residual"
+}
+],
+"exposure": [
+{
+"destination": "China",
+"share_of_own_crude_imports_pct": 47.0,
+"strategic_inventory_mb": 1541.0,
+"inventory_cover_days": 285.3703703704,
+"exposure": 98.3894972783
+},
+{
+"destination": "India",
+"share_of_own_crude_imports_pct": 44.0,
+"strategic_inventory_mb": 250.0,
+"inventory_cover_days": 119.0476190476,
+"exposure": 96.0
+},
+{
+"destination": "Europe",
+"share_of_own_crude_imports_pct": 8.0,
+"strategic_inventory_mb": 1285.0,
+"inventory_cover_days": 1606.25,
+"exposure": 33.5994236311
+},
+{
+"destination": "United States",
+"share_of_own_crude_imports_pct": 2.0,
+"strategic_inventory_mb": 1700.0,
+"inventory_cover_days": 4250.0,
+"exposure": 0.0
+}
+],
+"timeline": [
+{
+"date": "2026-01-15",
+"event": "Pre-war baseline",
+"brent_usd": 72.0,
+"hormuz_flow_mbd": 20.4,
+"source_note": "Q4-2025 Hormuz flows 20.7 mbd (EIA); Brent pre-war range"
+},
+{
+"date": "2026-02-15",
+"event": "Iran triples exports pre-emptively",
+"brent_usd": 64.0,
+"hormuz_flow_mbd": 20.5,
+"source_note": "Grand View: Brent avg $64/bbl Feb-2026; Iran surged exports 15-20 Feb"
+},
+{
+"date": "2026-02-28",
+"event": "US-Israel strikes begin (Op. Epic Fury)",
+"brent_usd": 78.0,
+"hormuz_flow_mbd": 14.0,
+"source_note": "Conflict start; ~90% of traffic diverted within days (Britannica)"
+},
+{
+"date": "2026-03-04",
+"event": "Iran declares strait closed",
+"brent_usd": 92.0,
+"hormuz_flow_mbd": 6.0,
+"source_note": "Traffic >95% diverted; CRS/Wikipedia"
+},
+{
+"date": "2026-03-17",
+"event": "Brent breaks $100",
+"brent_usd": 100.0,
+"hormuz_flow_mbd": 5.0,
+"source_note": "ORF America: Brent above $100 on 17 Mar"
+},
+{
+"date": "2026-03-30",
+"event": "Peak",
+"brent_usd": 116.0,
+"hormuz_flow_mbd": 4.5,
+"source_note": "Grand View: peak ~$116/bbl on 30 Mar"
+},
+{
+"date": "2026-04-15",
+"event": "IEA 400 mb emergency release absorbed",
+"brent_usd": 105.0,
+"hormuz_flow_mbd": 5.5,
+"source_note": "IEA released 400 mb from emergency stocks (11 Mar)"
+},
+{
+"date": "2026-05-08",
+"event": "NYT redistribution window closes",
+"brent_usd": 95.0,
+"hormuz_flow_mbd": 7.0,
+"source_note": "NYT trade-flow analysis window ends"
+},
+{
+"date": "2026-06-17",
+"event": "US-Iran memorandum of understanding",
+"brent_usd": 74.0,
+"hormuz_flow_mbd": 11.0,
+"source_note": "14-point MoU signed; strait reopening agreed"
+},
+{
+"date": "2026-07-03",
+"event": "Post-MoU normalisation",
+"brent_usd": 72.0,
+"hormuz_flow_mbd": 13.0,
+"source_note": "Brent returned to pre-war levels (Al Jazeera)"
+},
+{
+"date": "2026-07-07",
+"event": "Three merchant ships struck",
+"brent_usd": 79.0,
+"hormuz_flow_mbd": 6.5,
+"source_note": "Renewed hostilities; no large vessel transited with AIS on since 7 Jul"
+},
+{
+"date": "2026-07-10",
+"event": "Current",
+"brent_usd": 76.58,
+"hormuz_flow_mbd": 6.0,
+"source_note": "Al Jazeera: Brent $76.58 at 05:00 GMT, 10 Jul 2026"
+}
+],
+"redistribution": [
+{
+"country": "United States",
+"role": "Non-Gulf exporter",
+"revenue_change_usd_bn": 50.0,
+"direction_observed": "up",
+"source_note": "NYT analysis: war start to 8 May 2026 vs same period a year earlier"
+},
+{
+"country": "Russia",
+"role": "Non-Gulf exporter",
+"revenue_change_usd_bn": 15.0,
+"direction_observed": "up",
+"source_note": "NYT: steady exports, >$15bn revenue increase"
+},
+{
+"country": "Saudi Arabia",
+"role": "Gulf - has bypass",
+"revenue_change_usd_bn": null,
+"direction_observed": "up",
+"source_note": "NYT: revenue up via Red Sea pipeline re-routing despite export decline"
+},
+{
+"country": "Oman",
+"role": "Gulf - outside strait",
+"revenue_change_usd_bn": null,
+"direction_observed": "up",
+"source_note": "NYT: avoided bottleneck by geography"
+},
+{
+"country": "Iran",
+"role": "Gulf - controls strait",
+"revenue_change_usd_bn": null,
+"direction_observed": "up",
+"source_note": "NYT: retained strait access, revenue increased"
+},
+{
+"country": "Iraq",
+"role": "Gulf - no bypass",
+"revenue_change_usd_bn": null,
+"direction_observed": "down",
+"source_note": "NYT: revenue declined"
+},
+{
+"country": "Kuwait",
+"role": "Gulf - no bypass",
+"revenue_change_usd_bn": null,
+"direction_observed": "down",
+"source_note": "NYT: revenue declined"
+},
+{
+"country": "Qatar",
+"role": "Gulf - no bypass",
+"revenue_change_usd_bn": null,
+"direction_observed": "down",
+"source_note": "NYT: revenue declined; QatarEnergy force majeure"
+},
+{
+"country": "United Arab Emirates",
+"role": "Gulf - partial bypass",
+"revenue_change_usd_bn": null,
+"direction_observed": "down",
+"source_note": "NYT: revenue declined despite ADCOP"
+}
+]
+};
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a = {}) => {
+  const n = document.createElementNS(NS, t);
+  for (const k in a) n.setAttribute(k, a[k]);
+  return n;
+};
+const pct = v => (v * 100).toFixed(0) + "%";
+
+/* ---------- soundings ---------- */
+const H = R.headline;
+document.getElementById("soundings").innerHTML = [
+  [`${H.hormuz_crude_mbd}`, "mb/d", "Crude &amp; condensate through the strait, pre-war", ""],
+  [`${pct(H.break_even_retention)}`, "", "Break-even retention rate — move less and revenue falls", "hz"],
+  [`${H.bypass_gap_mbd}`, "mb/d", `Stranded: ${pct(1 - H.bypass_cover)} of Hormuz crude has no bypass route`, ""],
+  [`${H.accuracy_exante}`, "", "Winner/loser calls from pipeline capacity alone", ""],
+].map(([v, u, k, c]) =>
+  `<div class="sounding ${c}"><div class="v">${v}${u ? `<small>${u}</small>` : ""}</div><div class="k">${k}</div></div>`
+).join("");
+
+/* ══════════════════════════════════════════════════════════════════
+   SIGNATURE — the chokepoint ribbon
+   ══════════════════════════════════════════════════════════════════ */
+const EXP = R.exporters;
+const DEST = R.destinations.filter(d => d.hormuz_crude_mbd > 0.35);
+
+const W = 1080, Hh = 470;
+const GATE_X = 512, GATE_W = 56;      // the aperture
+const LX = 232, RX = 830;             // where ribbons leave / arrive
+const SCALE = 300 / 14.2;             // px per mb/d
+const gF = document.getElementById("r-flows");
+const gS = document.getElementById("r-strait");
+const gL = document.getElementById("r-labels");
+
+/* stack exporters on the left, destinations on the right */
+let y = 62;
+EXP.forEach(e => { e._y = y + (e.hormuz_mbd * SCALE) / 2; e._h = e.hormuz_mbd * SCALE; y += e._h + 9; });
+const leftSpan = y - 9 - 62;
+
+y = 62;
+DEST.forEach(d => { d._y = y + (d.hormuz_crude_mbd * SCALE) / 2; d._h = d.hormuz_crude_mbd * SCALE; y += d._h + 9; });
+
+/* the strait aperture itself */
+const gateTop = 62, gateBot = 62 + leftSpan;
+gS.appendChild(el("rect", { x: GATE_X, y: 20, width: GATE_W, height: gateTop - 20 + 6, fill: "#D9C89E", opacity: ".13" }));
+gS.appendChild(el("rect", { x: GATE_X, y: gateBot + 4, width: GATE_W, height: Hh - gateBot - 26, fill: "#D9C89E", opacity: ".13" }));
+[[GATE_X, "IRAN"], [GATE_X, "OMAN"]].forEach(([x, t], i) => {
+  const n = el("text", { x: x + GATE_W / 2, y: i ? Hh - 12 : 14, "text-anchor": "middle", class: "lbl" });
+  n.textContent = t; gS.appendChild(n);
+});
+
+const ribbon = (x1, yc1, x2, yc2, h1, h2, fill, cls) => {
+  const cx = (x1 + x2) / 2;
+  const p = el("path", {
+    class: "flow " + (cls || ""), fill,
+    d: `M${x1},${yc1 - h1 / 2} C${cx},${yc1 - h1 / 2} ${cx},${yc2 - h2 / 2} ${x2},${yc2 - h2 / 2}
+        L${x2},${yc2 + h2 / 2} C${cx},${yc2 + h2 / 2} ${cx},${yc1 + h1 / 2} ${x1},${yc1 + h1 / 2} Z`
+  });
+  return p;
+};
+
+function draw(state) {
+  gF.innerHTML = ""; gL.innerHTML = "";
+  const war = state === "war";
+  const gateCentre = (gateTop + gateBot) / 2;
+
+  /* ---- exporters → aperture ---- */
+  EXP.forEach(e => {
+    const through = war ? e.bypass_spare_mbd * 0 : e.hormuz_mbd;   // in war, strait carries ~nothing
+    const bypass  = war ? Math.min(e.bypass_spare_mbd, e.hormuz_mbd) : 0;
+    const stranded = war ? e.hormuz_mbd - bypass : 0;
+
+    /* the barrels that make it through the strait */
+    if (through > 0.01) {
+      gF.appendChild(ribbon(LX, e._y, GATE_X, gateCentre, e._h, e._h * 0.92, "url(#gCrude)"));
+    }
+    /* the barrels that strand — they pile against the closed gate */
+    if (stranded > 0.01) {
+      const h = stranded * SCALE;
+      gF.appendChild(ribbon(LX, e._y, GATE_X - 4, e._y, h, h * 0.55, "url(#gStrand)"));
+    }
+    /* the barrels that go around by pipe — arc above the strait */
+    if (bypass > 0.01) {
+      const h = bypass * SCALE;
+      const p = el("path", {
+        class: "flow", fill: "none", stroke: "url(#gBypass)", "stroke-width": Math.max(h, 3),
+        d: `M${LX},${e._y} C${GATE_X - 120},${e._y} ${GATE_X - 90},34 ${GATE_X + GATE_W / 2},34
+            C${GATE_X + 190},34 ${RX - 150},${gateCentre} ${RX},${gateCentre}`
+      });
+      gF.appendChild(p);
+    }
+
+    /* exporter label */
+    const t = el("text", { x: LX - 12, y: e._y + 4, "text-anchor": "end", class: "lbl-v" });
+    t.textContent = e.country.replace("United Arab Emirates", "UAE").replace("Bahrain and other", "Other");
+    gL.appendChild(t);
+    const s = el("text", { x: LX - 12, y: e._y + 17, "text-anchor": "end", class: "lbl" });
+    s.textContent = `${e.hormuz_mbd.toFixed(1)} mb/d` + (e.bypass_spare_mbd > 0 ? "  ⟿ pipe" : "");
+    gL.appendChild(s);
+  });
+
+  /* ---- aperture → destinations ---- */
+  const delivered = war ? R.headline.bypass_gap_mbd * 0 + EXP.reduce((a, e) => a + Math.min(e.bypass_spare_mbd, e.hormuz_mbd), 0)
+                        : R.headline.hormuz_crude_mbd;
+  const ratio = delivered / R.headline.hormuz_crude_mbd;
+
+  DEST.forEach(d => {
+    const h = d._h * ratio;
+    if (h < 0.6) return;
+    gF.appendChild(ribbon(GATE_X + GATE_W, gateCentre, RX, d._y, h * 1.02, h,
+      war ? "url(#gBypass)" : "url(#gCrude)"));
+    const t = el("text", { x: RX + 12, y: d._y + 4, class: "lbl-v" });
+    t.textContent = d.destination;
+    gL.appendChild(t);
+    const s = el("text", { x: RX + 12, y: d._y + 17, class: "lbl" });
+    s.textContent = `${(d.hormuz_crude_mbd * ratio).toFixed(1)} mb/d`;
+    gL.appendChild(s);
+  });
+
+  /* ---- the gate ---- */
+  const gate = el("rect", {
+    x: GATE_X, y: gateTop, width: GATE_W, height: gateBot - gateTop,
+    fill: war ? "rgba(230,57,128,.14)" : "rgba(232,163,61,.07)",
+    stroke: war ? "#E63980" : "var(--hair)",
+    "stroke-width": war ? 1.5 : 1,
+    "stroke-dasharray": war ? "5 3" : "none"
+  });
+  gF.appendChild(gate);
+
+  const cap = el("text", { x: GATE_X + GATE_W / 2, y: gateBot + 26, "text-anchor": "middle", class: "sea-lbl" });
+  cap.textContent = war ? "closed" : "Strait of Hormuz";
+  cap.setAttribute("fill", war ? "#E63980" : "#7FA3B0");
+  gL.appendChild(cap);
+
+  /* readout */
+  const stranded = war ? R.headline.bypass_gap_mbd : 0;
+  const moving = war ? EXP.reduce((a, e) => a + Math.min(e.bypass_spare_mbd, e.hormuz_mbd), 0) : R.headline.hormuz_crude_mbd;
+  document.getElementById("readout").innerHTML = `
+    <div><span>Moving</span> &nbsp;<b style="color:var(--gain)">${moving.toFixed(1)} mb/d</b></div>
+    <div><span>Stranded</span> &nbsp;<b style="color:var(--magenta)">${stranded.toFixed(1)} mb/d</b></div>
+    <div><span>Corridor coverage</span> &nbsp;<b>${pct(moving / R.headline.hormuz_crude_mbd)}</b></div>
+    <div><span>Exporters with no route out</span> &nbsp;<b>${war ? "5 of 7" : "—"}</b></div>`;
+}
+
+const bPre = document.getElementById("btn-pre"), bWar = document.getElementById("btn-war");
+const setState = s => {
+  bPre.setAttribute("aria-pressed", s === "pre");
+  bWar.setAttribute("aria-pressed", s === "war");
+  draw(s);
+};
+bPre.onclick = () => setState("pre");
+bWar.onclick = () => setState("war");
+draw("pre");
+
+/* ══════════════════════════════════════════════════════════════════
+   BREAK-EVEN CHART
+   ══════════════════════════════════════════════════════════════════ */
+(function () {
+  const svg = document.getElementById("breakeven");
+  const w = 1080, h = 400, mL = 160, mR = 60, mT = 44, mB = 54;
+  const x = v => mL + v * (w - mL - mR);
+  const rows = R.exporters.filter(e => e.actual);
+  const step = (h - mT - mB) / rows.length;
+  const rStar = R.headline.break_even_retention;
+
+  /* grid */
+  for (let v = 0; v <= 1.0001; v += 0.25) {
+    svg.appendChild(el("line", { x1: x(v), y1: mT - 10, x2: x(v), y2: h - mB, stroke: "rgba(127,163,176,.13)" }));
+    const t = el("text", { x: x(v), y: h - mB + 20, "text-anchor": "middle", class: "lbl" });
+    t.textContent = pct(v); svg.appendChild(t);
+  }
+
+  /* the line itself — chart magenta, the ink of a restricted area */
+  svg.appendChild(el("rect", { x: mL, y: mT - 10, width: x(rStar) - mL, height: h - mB - mT + 10, fill: "rgba(230,57,128,.05)" }));
+  svg.appendChild(el("line", { x1: x(rStar), y1: mT - 22, x2: x(rStar), y2: h - mB + 2, stroke: "#E63980", "stroke-width": 1.5 }));
+  const bl = el("text", { x: x(rStar), y: mT - 29, "text-anchor": "middle", class: "lbl" });
+  bl.setAttribute("fill", "#E63980");
+  bl.textContent = `BREAK-EVEN  r* = ${pct(rStar)}`;
+  svg.appendChild(bl);
+
+  const lz = el("text", { x: mL + 8, y: h - mB - 8, class: "sea-lbl" });
+  lz.setAttribute("fill", "rgba(230,57,128,.5)");
+  lz.textContent = "revenue falls"; svg.appendChild(lz);
+  const gz = el("text", { x: w - mR - 8, y: h - mB - 8, "text-anchor": "end", class: "sea-lbl" });
+  gz.setAttribute("fill", "rgba(87,198,169,.5)");
+  gz.textContent = "revenue rises"; svg.appendChild(gz);
+
+  rows.forEach((e, i) => {
+    const yy = mT + step * i + step / 2;
+    const up = e.actual === "up";
+    const col = up ? "#57C6A9" : "#E63980";
+
+    const nm = el("text", { x: mL - 18, y: yy + 4, "text-anchor": "end", class: "lbl-v" });
+    nm.textContent = e.country.replace("United Arab Emirates", "UAE");
+    svg.appendChild(nm);
+
+    /* the drift from rated to realised */
+    svg.appendChild(el("line", {
+      x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
+      stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
+      "stroke-width": e.hit_exante ? 1 : 2,
+      "stroke-dasharray": "3 3"
+    }));
+
+    /* rated (hollow) */
+    svg.appendChild(el("circle", {
+      cx: x(e.structural_retention), cy: yy, r: 5.5,
+      fill: "none", stroke: "#7FA3B0", "stroke-width": 1.5
+    }));
+    /* realised (filled) */
+    svg.appendChild(el("circle", { cx: x(e.observed_retention), cy: yy, r: 6, fill: col }));
+
+    if (!e.hit_exante) {
+      const m = el("text", { x: x(e.structural_retention) + 14, y: yy - 12, class: "lbl" });
+      m.setAttribute("fill", "#E8A33D");
+      m.textContent = "rated 76% → realised 45%";
+      svg.appendChild(m);
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   TABLE
+   ══════════════════════════════════════════════════════════════════ */
+document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actual).map(e => `
+  <tr class="${e.actual}">
+    <td>${e.country}</td>
+    <td class="mono" style="color:${e.bypass_spare_mbd > 0 ? 'var(--gain)' : 'var(--sounding)'}">
+      ${e.bypass_pipeline === "none" ? "— none —" : e.bypass_pipeline}</td>
+    <td class="n mono">${e.hormuz_mbd.toFixed(2)}</td>
+    <td class="n mono">${e.bypass_spare_mbd.toFixed(1)}</td>
+    <td class="n mono">${pct(e.structural_retention)}</td>
+    <td class="n mono">${pct(e.observed_retention)}</td>
+    <td><span class="tag ${e.pred_exante}">${e.pred_exante}</span>
+        ${e.hit_exante ? "" : ' <span class="miss">miss</span>'}</td>
+    <td><span class="tag ${e.actual}">${e.actual}</span></td>
+  </tr>`).join("");
+
+/* ══════════════════════════════════════════════════════════════════
+   TIMELINE — Brent (line) vs transit volume (area)
+   ══════════════════════════════════════════════════════════════════ */
+(function () {
+  const svg = document.getElementById("timeline");
+  const T = R.timeline;
+  const w = 1080, h = 340, mL = 52, mR = 56, mT = 30, mB = 62;
+  const t0 = new Date(T[0].date), t1 = new Date(T[T.length - 1].date);
+  const X = d => mL + (new Date(d) - t0) / (t1 - t0) * (w - mL - mR);
+  const YP = v => mT + (1 - (v - 55) / (120 - 55)) * (h - mT - mB);
+  const YF = v => h - mB - (v / 22) * (h - mT - mB) * 0.9;
+
+  for (let p = 60; p <= 120; p += 20) {
+    svg.appendChild(el("line", { x1: mL, y1: YP(p), x2: w - mR, y2: YP(p), stroke: "rgba(127,163,176,.1)" }));
+    const t = el("text", { x: mL - 10, y: YP(p) + 4, "text-anchor": "end", class: "lbl" });
+    t.textContent = "$" + p; svg.appendChild(t);
+  }
+
+  /* transit volume as a filled area — the thing that actually collapsed */
+  let a = `M${X(T[0].date)},${h - mB}`;
+  T.forEach(d => a += ` L${X(d.date)},${YF(d.hormuz_flow_mbd)}`);
+  a += ` L${X(T[T.length - 1].date)},${h - mB} Z`;
+  svg.appendChild(el("path", { d: a, fill: "rgba(127,163,176,.14)" }));
+
+  /* Brent */
+  let l = "";
+  T.forEach((d, i) => l += `${i ? "L" : "M"}${X(d.date)},${YP(d.brent_usd)}`);
+  svg.appendChild(el("path", { d: l, fill: "none", stroke: "#E8A33D", "stroke-width": 2 }));
+
+  const marks = {
+    "2026-03-04": "strait declared closed",
+    "2026-03-30": "peak $116",
+    "2026-06-17": "MoU signed",
+    "2026-07-07": "ships struck"
+  };
+  T.forEach(d => {
+    svg.appendChild(el("circle", { cx: X(d.date), cy: YP(d.brent_usd), r: 3, fill: "#E8A33D" }));
+    if (marks[d.date]) {
+      svg.appendChild(el("line", {
+        x1: X(d.date), y1: mT - 8, x2: X(d.date), y2: h - mB,
+        stroke: "#E63980", "stroke-width": 1, "stroke-dasharray": "2 4", opacity: ".6"
+      }));
+      const t = el("text", { x: X(d.date), y: mT - 14, "text-anchor": "middle", class: "lbl" });
+      t.setAttribute("fill", "#E63980");
+      t.textContent = marks[d.date];
+      svg.appendChild(t);
+    }
+  });
+
+  ["2026-01-15", "2026-03-30", "2026-05-08", "2026-07-10"].forEach(d => {
+    const t = el("text", { x: X(d), y: h - mB + 22, "text-anchor": "middle", class: "lbl" });
+    t.textContent = new Date(d).toLocaleDateString("en", { month: "short", day: "numeric" });
+    svg.appendChild(t);
+  });
+
+  const k1 = el("text", { x: mL, y: h - 14, class: "lbl" });
+  k1.setAttribute("fill", "#E8A33D"); k1.textContent = "— Brent, $/bbl";
+  svg.appendChild(k1);
+  const k2 = el("text", { x: mL + 130, y: h - 14, class: "lbl" });
+  k2.textContent = "▧ Hormuz transit, mb/d";
+  svg.appendChild(k2);
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   EXPOSURE
+   ══════════════════════════════════════════════════════════════════ */
+document.getElementById("exposure").innerHTML = R.exposure.map(e => `
+  <div class="exp-row">
+    <div>
+      <div class="nm">${e.destination}</div>
+      <div class="sub">${e.share_of_own_crude_imports_pct}% via strait</div>
+    </div>
+    <div class="exp-bar"><i data-w="${e.exposure}"></i></div>
+    <div>
+      <div class="sc">${Math.round(e.exposure)}</div>
+      <div class="sub" style="text-align:right">${Math.round(e.inventory_cover_days)}d</div>
+    </div>
+  </div>`).join("");
+
+/* reveal bars once visible */
+const io = new IntersectionObserver(es => es.forEach(x => {
+  if (x.isIntersecting) {
+    x.target.querySelectorAll("[data-w]").forEach((b, i) =>
+      setTimeout(() => b.style.width = b.dataset.w + "%", i * 110));
+    io.disconnect();
+  }
+}), { threshold: .3 });
+io.observe(document.getElementById("exposure"));
+</script>
+</body>
+</html>
