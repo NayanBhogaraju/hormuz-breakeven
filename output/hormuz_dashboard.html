@@ -6,20 +6,23 @@
 <title>The Hormuz Break-Even Line — 2026 Strait of Hormuz Crisis</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Admiralty chart palette: deep water, buff land, hydrographic magenta */
-    --ink:      #0B1A23;
-    --ink-2:    #102733;
-    --ink-3:    #17323F;
-    --buff:     #D9C89E;
-    --paper:    #EDE6D6;
-    --sounding: #7FA3B0;
-    --magenta:  #E63980;   /* chart ink for cautions + restricted areas */
-    --crude:    #E8A33D;
-    --gain:     #57C6A9;
-    --hair:     rgba(127,163,176,.22);
+    /* Institutional research terminal: near-black plane, cool slate, one blue accent */
+    --ink:      #0B0E13;   /* page plane */
+    --ink-2:    #10151C;   /* panel surface */
+    --ink-3:    #161C25;   /* raised surface */
+    --buff:     #43566B;   /* neutral steel (strait/land fills, low opacity) */
+    --paper:    #F2F5F8;   /* primary ink */
+    --sounding: #93A1B0;   /* muted ink: axes, labels, metadata */
+    --accent:   #3E8EEF;   /* single primary accent (blue): thresholds, chrome */
+    --magenta:  #3E8EEF;   /* legacy alias -> accent */
+    --crude:    #E0A100;   /* oil flow (gold) */
+    --gain:     #16B364;   /* status: revenue rose */
+    --loss:     #E5484D;   /* status: revenue fell */
+    --hair:     rgba(147,161,176,.16);
+    --hair-2:   rgba(147,161,176,.26);
 
     --serif: "Spectral", Georgia, serif;
     --sans:  "IBM Plex Sans", system-ui, sans-serif;
@@ -32,58 +35,73 @@
     background:var(--ink);
     color:var(--paper);
     font-family:var(--sans);
-    font-weight:300;
+    font-weight:400;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
-    /* bathymetric hairlines: the chart grid */
+    counter-reset:sec;
+    /* faint structural grid + a cool top-light wash for depth */
     background-image:
+      radial-gradient(1200px 620px at 78% -8%, rgba(62,142,239,.10), transparent 60%),
       repeating-linear-gradient(0deg, transparent 0 79px, var(--hair) 79px 80px),
       repeating-linear-gradient(90deg, transparent 0 79px, var(--hair) 79px 80px);
     background-attachment:fixed;
   }
 
-  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
 
-  /* sea features are labelled in italic serif on a real chart. land in roman. */
-  .eyebrow{
-    font-family:var(--serif);
-    font-style:italic;
-    font-weight:300;
-    font-size:15px;
-    letter-spacing:.04em;
+  /* ---------- report classification bar ---------- */
+  .classbar{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--sounding);
-    margin-bottom:14px;
+    padding:15px 0;border-bottom:1px solid var(--hair-2);
   }
-  .eyebrow::before{content:"— ";opacity:.5}
+  .classbar .tick{color:var(--accent)}
+  .classbar b{color:var(--paper);font-weight:500}
+
+  /* section eyebrows read as numbered report headings */
+  .eyebrow{
+    font-family:var(--mono);
+    font-weight:500;
+    font-size:11.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:16px;
+  }
+  section .eyebrow::before{
+    content:counter(sec,decimal-leading-zero) "  ";
+    color:var(--sounding);
+  }
 
   .mono{font-family:var(--mono)}
 
   /* ---------- masthead ---------- */
-  header{padding:82px 0 54px;position:relative}
+  header{padding:56px 0 50px;position:relative}
   .rule{height:1px;background:var(--hair);margin:0}
 
   h1{
-    font-family:var(--serif);
+    font-family:var(--sans);
     font-weight:600;
-    font-size:clamp(40px,6.4vw,74px);
-    line-height:1.02;
-    letter-spacing:-.02em;
+    font-size:clamp(40px,6.2vw,72px);
+    line-height:1.03;
+    letter-spacing:-.03em;
     margin-bottom:22px;
   }
-  h1 em{font-style:italic;font-weight:300;color:var(--magenta)}
+  h1 em{font-style:normal;font-weight:600;color:var(--accent)}
 
   .standfirst{
     font-size:19px;
-    max-width:62ch;
-    color:#C4C8C2;
-    font-weight:300;
+    max-width:64ch;
+    color:#C6CFD9;
+    font-weight:400;
   }
-  .standfirst strong{color:var(--paper);font-weight:500}
+  .standfirst strong{color:var(--paper);font-weight:600}
 
   .byline{
-    margin-top:30px;
+    margin-top:28px;
     font-family:var(--mono);
-    font-size:11.5px;
+    font-size:11px;
     letter-spacing:.09em;
     text-transform:uppercase;
     color:var(--sounding);
@@ -95,41 +113,46 @@
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:1px;
-    background:var(--hair);
-    border-top:1px solid var(--hair);
-    border-bottom:1px solid var(--hair);
-    margin:56px 0 0;
+    background:var(--hair-2);
+    border:1px solid var(--hair-2);
+    margin:52px 0 0;
   }
-  .sounding{background:var(--ink);padding:26px 22px}
+  .sounding{background:var(--ink-2);padding:24px 22px 22px;position:relative}
+  .sounding::before{
+    content:"";position:absolute;top:0;left:0;width:28px;height:2px;background:var(--sounding);
+  }
+  .sounding.hz::before{background:var(--accent);width:44px}
   .sounding .v{
     font-family:var(--mono);
-    font-size:34px;
-    font-weight:500;
+    font-size:36px;
+    font-weight:600;
     letter-spacing:-.02em;
     line-height:1;
     color:var(--paper);
+    font-variant-numeric:tabular-nums;
   }
-  .sounding .v small{font-size:16px;opacity:.55;margin-left:2px}
+  .sounding .v small{font-size:15px;font-weight:500;opacity:.5;margin-left:3px;letter-spacing:0}
   .sounding .k{
-    margin-top:9px;
-    font-size:12.5px;
+    margin-top:11px;
+    font-size:12px;
     color:var(--sounding);
-    line-height:1.45;
+    line-height:1.5;
   }
-  .sounding.hz .v{color:var(--magenta)}
+  .sounding.hz .v{color:var(--accent)}
 
   /* ---------- sections ---------- */
-  section{padding:78px 0;border-bottom:1px solid var(--hair)}
+  section{padding:70px 0;border-bottom:1px solid var(--hair-2);counter-increment:sec}
   h2{
-    font-family:var(--serif);
+    font-family:var(--sans);
     font-weight:600;
-    font-size:clamp(27px,3.4vw,38px);
-    letter-spacing:-.015em;
-    line-height:1.12;
+    font-size:clamp(26px,3.2vw,36px);
+    letter-spacing:-.02em;
+    line-height:1.14;
     margin-bottom:16px;
+    color:var(--paper);
   }
-  .lede{max-width:66ch;color:#C4C8C2;font-size:16.5px;margin-bottom:34px}
-  .lede strong{color:var(--paper);font-weight:500}
+  .lede{max-width:70ch;color:#B9C3CE;font-size:16.5px;margin-bottom:34px}
+  .lede strong{color:var(--paper);font-weight:600}
 
   /* ---------- signature: the chokepoint ribbon ---------- */
   .toggle{
@@ -150,13 +173,13 @@
     transition:background .28s, color .28s;
   }
   .toggle button:hover{color:var(--paper)}
-  .toggle button[aria-pressed="true"]{background:var(--magenta);color:#0B1A23;font-weight:500}
+  .toggle button[aria-pressed="true"]{background:var(--accent);color:#07101E;font-weight:600}
   .toggle button:focus-visible{outline:2px solid var(--paper);outline-offset:-2px}
 
   .ribbon-frame{
-    border:1px solid var(--hair);
+    border:1px solid var(--hair-2);
     background:linear-gradient(180deg, var(--ink-2), var(--ink));
-    padding:8px;
+    padding:10px;border-radius:4px;
   }
   svg{display:block;width:100%;height:auto}
 
@@ -177,7 +200,7 @@
   .readout div b{font-weight:500}
 
   /* ---------- break-even chart ---------- */
-  .chart-frame{border:1px solid var(--hair);background:var(--ink-2);padding:26px 18px 12px}
+  .chart-frame{border:1px solid var(--hair-2);background:var(--ink-2);padding:26px 18px 12px;border-radius:4px}
 
   .legend{
     display:flex;gap:26px;flex-wrap:wrap;
@@ -188,47 +211,50 @@
   .legend i{display:inline-block;width:9px;height:9px;margin-right:7px;vertical-align:middle}
   .sw-hollow{border:1.5px solid var(--sounding);border-radius:50%;background:none}
   .sw-gain{background:var(--gain);border-radius:50%}
-  .sw-loss{background:var(--magenta);border-radius:50%}
+  .sw-loss{background:var(--loss);border-radius:50%}
 
   /* ---------- verdict / callout ---------- */
   .verdict{
-    border-left:2px solid var(--magenta);
-    padding:6px 0 6px 26px;
+    border-left:2px solid var(--accent);
+    background:linear-gradient(90deg, rgba(62,142,239,.06), transparent 70%);
+    padding:16px 24px 16px 26px;
     margin:40px 0 0;
-    max-width:70ch;
+    max-width:74ch;
   }
-  .verdict p{font-family:var(--serif);font-size:20px;line-height:1.5;font-weight:300}
-  .verdict p em{color:var(--magenta);font-style:italic}
+  .verdict p{font-family:var(--serif);font-size:20px;line-height:1.5;font-weight:300;color:#DCE3EA}
+  .verdict p em{color:var(--accent);font-style:italic}
 
   /* ---------- table ---------- */
   table{width:100%;border-collapse:collapse;font-size:14px}
   th{
     text-align:left;
     font-family:var(--mono);
-    font-size:10.5px;
-    letter-spacing:.1em;
+    font-size:10px;
+    letter-spacing:.11em;
     text-transform:uppercase;
     color:var(--sounding);
-    font-weight:400;
+    font-weight:500;
     padding:0 14px 12px 0;
-    border-bottom:1px solid var(--hair);
+    border-bottom:1px solid var(--hair-2);
   }
-  th.n,td.n{text-align:right}
-  td{padding:13px 14px 13px 0;border-bottom:1px solid rgba(127,163,176,.1)}
+  th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}
+  td{padding:13px 14px 13px 0;border-bottom:1px solid var(--hair)}
+  tbody tr{transition:background .18s}
+  tbody tr:hover{background:rgba(147,161,176,.05)}
   td.mono{font-family:var(--mono);font-size:13px}
-  tr.up td:first-child{box-shadow:inset 2px 0 0 var(--gain)}
-  tr.down td:first-child{box-shadow:inset 2px 0 0 var(--magenta)}
-  tr.up td:first-child,tr.down td:first-child{padding-left:14px}
+  tr.up td:first-child{box-shadow:inset 3px 0 0 var(--gain)}
+  tr.down td:first-child{box-shadow:inset 3px 0 0 var(--loss)}
+  tr.up td:first-child,tr.down td:first-child{padding-left:16px;font-weight:500}
   .tag{
-    font-family:var(--mono);font-size:10px;letter-spacing:.08em;
-    text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;
+    font-family:var(--mono);font-size:10px;letter-spacing:.08em;font-weight:500;
+    text-transform:uppercase;padding:3px 8px;border:1px solid currentColor;border-radius:3px;
   }
   .tag.up{color:var(--gain)}
-  .tag.down{color:var(--magenta)}
+  .tag.down{color:var(--loss)}
   .miss{color:var(--crude);font-family:var(--mono);font-size:10px;letter-spacing:.08em}
 
   /* ---------- timeline ---------- */
-  .tl-frame{border:1px solid var(--hair);background:var(--ink-2);padding:22px 18px 8px}
+  .tl-frame{border:1px solid var(--hair-2);background:var(--ink-2);padding:22px 18px 8px;border-radius:4px}
 
   /* ---------- exposure bars ---------- */
   .exp{display:grid;gap:2px}
@@ -241,11 +267,11 @@
     border-bottom:1px solid rgba(127,163,176,.1);
   }
   .exp-row .nm{font-size:14px}
-  .exp-bar{height:9px;background:rgba(127,163,176,.13);position:relative;overflow:hidden}
+  .exp-bar{height:9px;background:rgba(147,161,176,.12);position:relative;overflow:hidden;border-radius:2px}
   .exp-bar i{
     position:absolute;inset:0 auto 0 0;
-    background:var(--magenta);
-    width:0;
+    background:linear-gradient(90deg, var(--accent), var(--loss));
+    width:0;border-radius:2px;
     transition:width 1.1s cubic-bezier(.4,0,.2,1);
   }
   .exp-row .sc{font-family:var(--mono);font-size:13px;text-align:right}
@@ -253,17 +279,19 @@
 
   /* ---------- notes ---------- */
   .cols{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .note{border-top:1px solid var(--hair-2);padding-top:18px}
   .note h3{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--sounding);font-weight:400;margin-bottom:14px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;
   }
-  .note p,.note li{font-size:13.5px;color:#AFB6B4;line-height:1.65}
+  .note p,.note li{font-size:13.5px;color:#AAB4BF;line-height:1.65}
   .note ul{list-style:none}
-  .note li{padding-left:15px;position:relative;margin-bottom:7px}
-  .note li::before{content:"·";position:absolute;left:2px;color:var(--sounding)}
-  .note a{color:var(--sounding)}
+  .note li{padding-left:16px;position:relative;margin-bottom:8px}
+  .note li::before{content:"—";position:absolute;left:0;color:var(--sounding);opacity:.6}
+  .note a{color:var(--accent)}
 
-  footer{padding:52px 0 78px;font-family:var(--mono);font-size:11px;color:var(--sounding);letter-spacing:.06em}
+  footer{padding:44px 0 80px;font-family:var(--mono);font-size:11px;color:var(--sounding);letter-spacing:.06em;line-height:1.7}
+  footer .frule{height:2px;width:44px;background:var(--accent);margin-bottom:22px}
 
   @media (max-width:860px){
     .soundings{grid-template-columns:repeat(2,1fr)}
@@ -281,19 +309,26 @@
 
 <div class="wrap">
 
+<!-- ═══════════════════ CLASSIFICATION BAR ═══════════════════ -->
+<div class="classbar">
+  <span><span class="tick">◆</span> Strategic Commodity Research</span>
+  <span>Strait of Hormuz · 26°34′N 56°15′E</span>
+  <span>Distribution: <b>Public</b> · 12 Jul 2026</span>
+</div>
+
 <!-- ═══════════════════ MASTHEAD ═══════════════════ -->
 <header>
-  <p class="eyebrow">Strait of Hormuz · 26°34′N 56°15′E · closed to shipping since 4 March 2026</p>
-  <h1>The Hormuz<br><em>break-even line</em></h1>
+  <p class="eyebrow">Trade-flow analysis · 2026 Strait of Hormuz crisis</p>
+  <h1>The Hormuz <em>break-even line</em></h1>
   <p class="standfirst">
-    When the strait shut, every Gulf exporter lost barrels. Only some lost money.
-    Saudi Arabia is the largest exporter through Hormuz and its oil revenue <strong>rose</strong>.
-    The UAE is the third largest and its revenue <strong>fell</strong>. Production scale explains
-    nothing about who survived. One variable, fixed years before the war, explains almost all of it.
+    When the strait shut, every Gulf exporter lost barrels — only some lost money.
+    Saudi Arabia is the largest exporter through Hormuz and its oil revenue <strong>rose ~10%</strong>.
+    The UAE is the third largest and its revenue <strong>fell ~25%</strong>. Production scale explains
+    nothing about who survived; one variable, fixed years before the war, explains almost all of it.
   </p>
   <p class="byline">
-    Nayan Bhogaraju &nbsp;<span>/</span>&nbsp; Trade-flow analysis
-    &nbsp;<span>/</span>&nbsp; Data: EIA · FREE Network · CRS &nbsp;<span>/</span>&nbsp; 12 July 2026
+    Nayan Bhogaraju &nbsp;<span>/</span>&nbsp; B.S. Economics, Georgia Tech
+    &nbsp;<span>/</span>&nbsp; Sources: EIA · Goldman Sachs · FREE Network · CRS
   </p>
 
   <div class="soundings" id="soundings"></div>
@@ -320,17 +355,17 @@
          aria-label="Flow diagram of crude oil through the Strait of Hormuz, exporters left, destinations right">
       <defs>
         <linearGradient id="gCrude" x1="0" x2="1">
-          <stop offset="0"   stop-color="#E8A33D" stop-opacity=".30"/>
-          <stop offset=".48" stop-color="#E8A33D" stop-opacity=".80"/>
-          <stop offset="1"   stop-color="#E8A33D" stop-opacity=".30"/>
+          <stop offset="0"   stop-color="#E0A100" stop-opacity=".30"/>
+          <stop offset=".48" stop-color="#E0A100" stop-opacity=".80"/>
+          <stop offset="1"   stop-color="#E0A100" stop-opacity=".30"/>
         </linearGradient>
         <linearGradient id="gBypass" x1="0" x2="1">
-          <stop offset="0" stop-color="#57C6A9" stop-opacity=".30"/>
-          <stop offset="1" stop-color="#57C6A9" stop-opacity=".75"/>
+          <stop offset="0" stop-color="#16B364" stop-opacity=".30"/>
+          <stop offset="1" stop-color="#16B364" stop-opacity=".75"/>
         </linearGradient>
         <linearGradient id="gStrand" x1="0" x2="1">
-          <stop offset="0" stop-color="#E63980" stop-opacity=".55"/>
-          <stop offset="1" stop-color="#E63980" stop-opacity=".10"/>
+          <stop offset="0" stop-color="#E5484D" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#E5484D" stop-opacity=".10"/>
         </linearGradient>
       </defs>
       <g id="r-flows"></g>
@@ -518,8 +553,10 @@
 </section>
 
 <footer>
-  Built as a replication-grade trade-flow exercise. Figures reflect reporting as of 12 July 2026;
-  the corridor remains contested and the data will move.
+  <div class="frule"></div>
+  Replication-grade trade-flow exercise · <span class="mono">python analysis.py</span> rebuilds every figure from source CSVs.<br>
+  Figures reflect reporting as of 12 July 2026; the corridor remains contested and the data will move.<br>
+  © 2026 Nayan Bhogaraju · Sources cited inline and in each CSV's <span class="mono">source_note</span> column.
 </footer>
 
 </div>
@@ -651,8 +688,8 @@ function draw(state) {
   /* ---- the gate ---- */
   const gate = el("rect", {
     x: GATE_X, y: gateTop, width: GATE_W, height: gateBot - gateTop,
-    fill: war ? "rgba(230,57,128,.14)" : "rgba(232,163,61,.07)",
-    stroke: war ? "#E63980" : "var(--hair)",
+    fill: war ? "rgba(229,72,77,.14)" : "rgba(224,161,0,.08)",
+    stroke: war ? "#E5484D" : "var(--hair)",
     "stroke-width": war ? 1.5 : 1,
     "stroke-dasharray": war ? "5 3" : "none"
   });
@@ -660,7 +697,7 @@ function draw(state) {
 
   const cap = el("text", { x: GATE_X + GATE_W / 2, y: gateBot + 26, "text-anchor": "middle", class: "sea-lbl" });
   cap.textContent = war ? "closed" : "Strait of Hormuz";
-  cap.setAttribute("fill", war ? "#E63980" : "#7FA3B0");
+  cap.setAttribute("fill", war ? "#E5484D" : "#93A1B0");
   gL.appendChild(cap);
 
   /* readout */
@@ -702,24 +739,24 @@ draw("pre");
   }
 
   /* the line itself — chart magenta, the ink of a restricted area */
-  svg.appendChild(el("rect", { x: mL, y: mT - 10, width: x(rStar) - mL, height: h - mB - mT + 10, fill: "rgba(230,57,128,.05)" }));
-  svg.appendChild(el("line", { x1: x(rStar), y1: mT - 22, x2: x(rStar), y2: h - mB + 2, stroke: "#E63980", "stroke-width": 1.5 }));
+  svg.appendChild(el("rect", { x: mL, y: mT - 10, width: x(rStar) - mL, height: h - mB - mT + 10, fill: "rgba(229,72,77,.05)" }));
+  svg.appendChild(el("line", { x1: x(rStar), y1: mT - 22, x2: x(rStar), y2: h - mB + 2, stroke: "#3E8EEF", "stroke-width": 1.5 }));
   const bl = el("text", { x: x(rStar), y: mT - 29, "text-anchor": "middle", class: "lbl" });
-  bl.setAttribute("fill", "#E63980");
+  bl.setAttribute("fill", "#3E8EEF");
   bl.textContent = `BREAK-EVEN  r* = ${pct(rStar)}`;
   svg.appendChild(bl);
 
   const lz = el("text", { x: mL + 8, y: h - mB - 8, class: "sea-lbl" });
-  lz.setAttribute("fill", "rgba(230,57,128,.5)");
+  lz.setAttribute("fill", "rgba(229,72,77,.5)");
   lz.textContent = "revenue falls"; svg.appendChild(lz);
   const gz = el("text", { x: w - mR - 8, y: h - mB - 8, "text-anchor": "end", class: "sea-lbl" });
-  gz.setAttribute("fill", "rgba(87,198,169,.5)");
+  gz.setAttribute("fill", "rgba(22,179,100,.7)");
   gz.textContent = "revenue rises"; svg.appendChild(gz);
 
   rows.forEach((e, i) => {
     const yy = mT + step * i + step / 2;
     const up = e.actual === "up";
-    const col = up ? "#57C6A9" : "#E63980";
+    const col = up ? "#16B364" : "#E5484D";
 
     const nm = el("text", { x: mL - 18, y: yy + 4, "text-anchor": "end", class: "lbl-v" });
     nm.textContent = e.country.replace("United Arab Emirates", "UAE");
@@ -731,7 +768,7 @@ draw("pre");
     if (hasReal) {
       svg.appendChild(el("line", {
         x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
-        stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
+        stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E0A100",
         "stroke-width": e.hit_exante ? 1 : 2,
         "stroke-dasharray": "3 3"
       }));
@@ -740,7 +777,7 @@ draw("pre");
     /* rated (hollow) */
     svg.appendChild(el("circle", {
       cx: x(e.structural_retention), cy: yy, r: 5.5,
-      fill: "none", stroke: "#7FA3B0", "stroke-width": 1.5
+      fill: "none", stroke: "#93A1B0", "stroke-width": 1.5
     }));
     /* realised (filled) — where reported. Otherwise mark the rated point by outcome colour. */
     if (hasReal) {
@@ -752,7 +789,7 @@ draw("pre");
     /* the miss: UAE's rated point sits above the line, yet it lost */
     if (!e.hit_exante) {
       const m = el("text", { x: x(e.structural_retention) + 14, y: yy - 12, class: "lbl" });
-      m.setAttribute("fill", "#E8A33D");
+      m.setAttribute("fill", "#E0A100");
       m.textContent = hasReal
         ? `rated ${pct(e.structural_retention)} → realised ${pct(e.observed_retention)} · lost`
         : `rated ${pct(e.structural_retention)} · lost`;
@@ -805,7 +842,7 @@ document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actua
   /* Brent */
   let l = "";
   T.forEach((d, i) => l += `${i ? "L" : "M"}${X(d.date)},${YP(d.brent_usd)}`);
-  svg.appendChild(el("path", { d: l, fill: "none", stroke: "#E8A33D", "stroke-width": 2 }));
+  svg.appendChild(el("path", { d: l, fill: "none", stroke: "#E0A100", "stroke-width": 2 }));
 
   const marks = {
     "2026-03-04": "strait declared closed",
@@ -814,14 +851,14 @@ document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actua
     "2026-06-20": "re-closed"
   };
   T.forEach(d => {
-    svg.appendChild(el("circle", { cx: X(d.date), cy: YP(d.brent_usd), r: 3, fill: "#E8A33D" }));
+    svg.appendChild(el("circle", { cx: X(d.date), cy: YP(d.brent_usd), r: 3, fill: "#E0A100" }));
     if (marks[d.date]) {
       svg.appendChild(el("line", {
         x1: X(d.date), y1: mT - 8, x2: X(d.date), y2: h - mB,
-        stroke: "#E63980", "stroke-width": 1, "stroke-dasharray": "2 4", opacity: ".6"
+        stroke: "#3E8EEF", "stroke-width": 1, "stroke-dasharray": "2 4", opacity: ".6"
       }));
       const t = el("text", { x: X(d.date), y: mT - 14, "text-anchor": "middle", class: "lbl" });
-      t.setAttribute("fill", "#E63980");
+      t.setAttribute("fill", "#3E8EEF");
       t.textContent = marks[d.date];
       svg.appendChild(t);
     }
@@ -834,7 +871,7 @@ document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actua
   });
 
   const k1 = el("text", { x: mL, y: h - 14, class: "lbl" });
-  k1.setAttribute("fill", "#E8A33D"); k1.textContent = "— Brent, $/bbl";
+  k1.setAttribute("fill", "#E0A100"); k1.textContent = "— Brent, $/bbl";
   svg.appendChild(k1);
   const k2 = el("text", { x: mL + 130, y: h - 14, class: "lbl" });
   k2.textContent = "▧ Hormuz transit, mb/d";
