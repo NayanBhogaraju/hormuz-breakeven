@@ -2,9 +2,9 @@
 
 **A trade-flow analysis of the 2026 Strait of Hormuz crisis.**
 
-When Iran closed the Strait of Hormuz on 4 March 2026, every Gulf exporter lost barrels. Only some lost money.
+When Iran declared the Strait of Hormuz closed on 4 March 2026, every Gulf exporter lost barrels. Only some lost money.
 
-Saudi Arabia is the **largest** crude exporter through the strait — its oil revenue **rose**. The UAE is the **third largest** — its revenue **fell**. Iraq, Kuwait and Qatar all fell. Oman and Iran rose. Production scale explains none of this.
+Saudi Arabia is the **largest** crude exporter through the strait — its oil revenue **rose 4.3%**. The UAE is the **third largest** — its revenue **fell**. Iraq and Kuwait lost 76% and 73%. Oman rose 26%. Production scale explains none of this.
 
 This project asks what does, and finds a single structural variable that calls the split in five of six cases: **spare bypass pipeline capacity** — a number that was fixed years before the war started.
 
@@ -25,35 +25,35 @@ A closure cuts `Q`. It also raises `P` for everyone still selling. So an exporte
 
 The right-hand side is set by the market, not by any individual country. It is the share of pre-war volume an exporter must still move to come out ahead.
 
-With **P₀ = $64/bbl** (Feb 2026) and a time-weighted **P₁ = $101.70/bbl** across the conflict window (28 Feb – 8 May 2026):
+With **P₀ = $64/bbl** (Feb 2026) and a time-weighted **P₁ = $106.94/bbl** across the conflict window (28 Feb – 8 May 2026):
 
-> ### r\* = 62.9%
-> Move more than 63% of your pre-war barrels and the price gain outruns the volume loss. Move less and nothing saves you.
+> ### r\* ≈ 59.8%
+> Move more than ~60% of your pre-war barrels and the price gain outruns the volume loss. Move less and nothing saves you.
 
-Only two Gulf exporters own pipelines that reach open water without transiting the strait. **9.3 of 14.2 mb/d — 65% of Hormuz crude — had no route out of the Gulf at all.**
+Only two Gulf exporters own pipelines that reach open water without transiting the strait. On EIA's real deliverable figure, just **2.6 of 14.5 mb/d — 18% of Hormuz crude — could actually go around.**
 
 ---
 
 ## Results
 
-| Exporter | Bypass route | Hormuz crude | Spare bypass | Retention (rated) | Retention (real) | Ex-ante call | Observed |
+| Exporter | Bypass route | Hormuz crude | Spare bypass | Retention (rated) | Revenue | Ex-ante call | Observed |
 |---|---|---:|---:|---:|---:|---|---|
-| Saudi Arabia | East–West (Petroline) | 5.28 mb/d | 3.5 | 66% | 80% | **up** ✓ | up |
-| Iraq | — none — | 3.24 | 0.0 | 0% | 30% | **down** ✓ | down |
-| UAE | ADCOP (Habshan–Fujairah) | 1.83 | 1.4 | 76% | 45% | **up** ✗ | down |
-| Iran | controls the strait | 1.51 | — | 100% | 100% | **up** ✓ | up |
-| Kuwait | — none — | 1.43 | 0.0 | 0% | 40% | **down** ✓ | down |
-| Qatar | — none — | 0.71 | 0.0 | 0% | 35% | **down** ✓ | down |
+| Saudi Arabia | East–West (Petroline) | 5.51 mb/d | 3.5 | 64% | **+4.3%** | **up** ✓ | up |
+| Iraq | — none — | 3.26 | 0.0 | 0% | **−76%** | **down** ✓ | down |
+| UAE | ADCOP (Habshan–Fujairah) | 1.84 | 1.4 | 76% | — | **up** ✗ | down |
+| Iran | controls the strait | 1.52 | — | 100% | — | **up** ✓ | up |
+| Kuwait | — none — | 1.45 | 0.0 | 0% | **−73%** | **down** ✓ | down |
+| Qatar | — none — | 0.71 | 0.0 | 0% | — | **down** ✓ | down |
 
 - **Ex-ante** (pipeline capacity only, knowable in 2024): **5 / 6**
-- **Ex-post** (realised volumes — an accounting check, not a forecast): **6 / 6**
-- **Every zero-bypass exporter lost revenue. No exception.**
+- **Magnitude check:** structural retention rank-orders the *size* of the revenue moves, not just their sign — Spearman ρ = **+0.87**.
+- **Every zero-bypass exporter lost revenue. No exception**, and the deepest cuts fell on exactly those exporters.
 
 ### The one miss is the finding
 
-The UAE owns ADCOP. On paper it left the country at 76% retention — comfortably above the line. It lost anyway, landing at **45%**.
+The UAE owns ADCOP. On paper it left the country at 76% retention — comfortably above the line. It lost anyway.
 
-Rated capacity is not deliverable capacity. The IEA notes that the logistics and supply chains required to re-route at scale *"have not been robustly tested."* The model assumed a pipe drawn on a map could be filled. It could not.
+Rated capacity is not deliverable capacity. EIA describes the UAE's real excess bypass as only *"limited,"* and the same gap shrinks corridor-wide deliverable spare to **2.6 mb/d against a 4.9 mb/d nameplate sum**. The model assumed a pipe drawn on a map could be filled. It could not.
 
 **For anyone mapping a supply chain, that is the transferable warning: a resilience estimate built off an infrastructure inventory will overstate what a corridor can actually absorb.**
 
@@ -61,16 +61,16 @@ Rated capacity is not deliverable capacity. The IEA notes that the logistics and
 
 ## Import-side exposure
 
-89.4% of Hormuz crude goes to Asia. The exposure index combines dependence (share of a country's crude arriving through the strait) with buffer (how long its stockpile could replace *those specific barrels*).
+84% of Hormuz crude goes to Asia. The exposure index combines dependence (share of a country's crude arriving through the strait) with buffer (how long its stockpile could replace *those specific barrels*).
 
 | Importer | Via Hormuz | Stockpile | Days of cover | Index |
 |---|---:|---:|---:|---:|
-| China | 47% | 1,541 mb | 285 | 98 |
-| India | 44% | 250 mb | 119 | 96 |
-| Europe | 8% | 1,285 mb | 1,606 | 34 |
-| United States | 2% | 1,700 mb | 4,250 | 0 |
+| China | 47% | 1,541 mb | 308 | 98 |
+| India | 44% | 250 mb | 125 | 96 |
+| Europe | 8% | 1,285 mb | 1,606 | 23 |
+| United States | 7% | 1,700 mb | 3,400 | 0 |
 
-India scores near China not because it is more dependent, but because it holds **250 mb** against China's 1,541.
+India scores near China not because it is more dependent, but because it holds **250 mb** against China's 1,541. *(Inventory levels here are unverified estimates — the index is illustrative, not precise.)*
 
 Japan (74% of crude via Hormuz) and South Korea (70%) are *more* dependent than anything scored here. Neither publishes inventory data in this dataset, so both are **excluded rather than imputed**. The gap is left visible on purpose.
 
@@ -79,36 +79,53 @@ Japan (74% of crude via Hormuz) and South Korea (70%) are *more* dependent than 
 ## Run it
 
 ```bash
-python analysis.py          # regenerates every figure from data/
+python analysis.py          # regenerates every figure AND rebuilds the dashboard
 open output/hormuz_dashboard.html
 ```
 
-Requires `pandas`, `numpy`. No number in the dashboard is entered by hand — it is all emitted from `analysis.py` into `output/results.json` and injected at build.
+Requires `pandas`, `numpy`. No number in the dashboard is entered by hand — it is emitted from `analysis.py` into `output/results.json` and injected into the template at build time.
 
 ```
 data/
-  exporters.csv        Hormuz shares (EIA/Vortexa Q1-2025) + bypass capacity (IEA 2026)
+  exporters.csv        Hormuz shares + bypass capacity
   destinations.csv     Destination flows + strategic inventories
   brent_timeline.csv   Brent spot + Hormuz transit volumes, Jan–Jul 2026
-  redistribution.csv   Observed revenue outcomes (NYT, war start → 8 May 2026)
-analysis.py            Break-even model, bypass gap, HHI, exposure index
-dashboard.html         Interactive dashboard (template)
+  redistribution.csv   Observed revenue outcomes (FREE Network, war window)
+analysis.py            Break-even model, bypass gap, HHI, exposure, sensitivity
+dashboard.html         Interactive dashboard (template, __RESULTS__ injected)
 output/                results.json · exporter_model.csv · hormuz_dashboard.html
 ```
 
-Every row in every CSV carries its own `source_note` column.
+Every row in every CSV carries its own `source_note` column stating whether the figure is **confirmed** against a primary source or an **estimate**.
 
 ---
 
-## Limits
+## Data provenance
 
-This is a sign test on six observations. It is suggestive, not powered.
+This is real, ongoing history, not a scenario. The crisis, Operation Epic Fury, CRS report R45281, the 17 June memorandum, and the FREE Network brief are all verifiable. The dataset separates what is sourced from what is estimated:
 
-- **Partial equilibrium.** Price is treated as exogenous to any single exporter — a strong assumption for Saudi Arabia, which is large enough to move it.
-- **Directional only.** The NYT reports revenue *signs* for Gulf states, not magnitudes, so the model cannot be scored on error, only on direction.
-- **Output-cut figures are trade-press estimates**, not audited production data.
-- **Crude and condensate only.** LNG (Qatar's force majeure) and refined products move on different economics and would change Qatar's picture materially.
-- **Bypass "spare" capacity** uses the IEA's 3.5–5.5 mb/d range, midpoint-allocated. The UAE result is sensitive to this allocation — which is precisely the point the miss is making.
+**Confirmed against primary sources**
+- Saudi Arabia = 38% of Hormuz crude+condensate, 5.5 mb/d; 84% of flow to Asia; combined KSA+UAE deliverable bypass 2.6 mb/d; US 0.5 mb/d = 7% of US crude imports — **EIA** Strait of Hormuz brief (2024)
+- Brent crossed $100 on 8 March, peaked ~$126; multi-phase closure (closed 4 Mar; US blockade 13 Apr–29 May; MoU 17 Jun; re-closed 20 Jun) — **Wikipedia**, *2026 Strait of Hormuz crisis*
+- Revenue: Saudi +4.3%, Oman +26%, Iraq −76%, Kuwait −73%, US +$50bn, Russia +$15bn — **FREE Network**, *The Hormuz Blockade: Winners, Losers, and Vulnerabilities* (20 Mar 2026)
+- East-West pipeline pushed toward 7.0 mb/d during the crisis — **S&P Global** (10 Mar 2026)
+
+**Estimates (flagged in-line, not presented as sourced fact)**
+- Individual non-Saudi country shares — EIA names only Saudi's share; the rest approximate 2024 export volumes
+- Daily Brent between dated anchors — interpolated from reported event levels
+- Importer strategic-inventory levels — unverified; the exposure index is illustrative
+
+---
+
+## Limits, and how they're handled
+
+This is a sign test on six observations, now with magnitudes for four of them. It is suggestive, not powered.
+
+- **Partial equilibrium.** Price is treated as exogenous to any single exporter — strong for Saudi Arabia. Probed with a **±15% price sweep**: the winner/loser call holds; only exporters within a few points of the line (Saudi, UAE) are sensitive to it.
+- **Small sample.** FREE Network published revenue *magnitudes* for four exporters, so the test is no longer sign-only — structural retention rank-orders the moves (ρ = +0.87). Still six observations.
+- **Realised retention is derived**, not sourced: `Q₁/Q₀ = revenue index ÷ price index`, replacing the earlier guessed output cuts. The revenue window and the price baseline differ slightly, so implied retention is indicative.
+- **Crude and condensate only.** LNG (~20% of world seaborne LNG, and Qatar's force majeure) moves on different economics and would change Qatar's picture materially.
+- **Bypass spare** uses EIA's real deliverable figure (2.6 mb/d combined), not a nameplate sum (4.9). The UAE result — the model's one miss — is exactly where nameplate and deliverable diverge.
 
 The conflict and the data are both still moving. Figures reflect reporting as of **12 July 2026**; the corridor remains contested.
 
@@ -116,11 +133,11 @@ The conflict and the data are both still moving. Figures reflect reporting as of
 
 ## Sources
 
-- **U.S. Energy Information Administration** — *Global Energy Security Data*, Q1 2026; Strait of Hormuz chokepoint briefs (Vortexa tanker tracking)
-- **International Energy Agency** — *Strait of Hormuz* factsheet; *Oil Market Report*, March 2026
-- **The New York Times** — trade-flow analysis, war start to 8 May 2026
+- **U.S. Energy Information Administration** — *Strait of Hormuz* chokepoint brief (2024)
+- **Wikipedia** — *2026 Strait of Hormuz crisis* (prices, closure timeline)
+- **FREE Network** — *The Hormuz Blockade: Winners, Losers, and Vulnerabilities*, 20 March 2026
 - **Congressional Research Service** — *Iran Conflict and the Strait of Hormuz* (R45281)
-- **FREE Network** — *The Hormuz Blockade: Winners, Losers, and Vulnerabilities*, March 2026
+- **S&P Global · Al Jazeera · NPR** — pipeline capacity, prices, and the 17 June memorandum
 
 ---
 
