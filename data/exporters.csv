@@ -1,8 +1,8 @@
-country,hormuz_share_pct,bypass_pipeline,bypass_capacity_mbd,bypass_spare_mbd,observed_output_cut_pct,source_note
-Saudi Arabia,37.2,East-West (Petroline),5.0,3.5,20,"EIA/Vortexa Q1-2025 share; IEA 2026 bypass range 3.5-5.5 mbd combined KSA+UAE"
-Iraq,22.8,none,0.0,0.0,70,"EIA/Vortexa Q1-2025; no operational bypass (Kirkuk-Ceyhan not Gulf-connected)"
-United Arab Emirates,12.9,ADCOP (Habshan-Fujairah),1.8,1.4,55,"EIA/Vortexa Q1-2025; ADCOP nameplate 1.8 mbd, partially pre-utilised"
-Iran,10.6,none,0.0,0.0,0,"EIA/Vortexa Q1-2025; retained strait access as the controlling party"
-Kuwait,10.1,none,0.0,0.0,60,"EIA/Vortexa Q1-2025; no bypass infrastructure"
-Qatar,5.0,none,0.0,0.0,65,"Residual of top-5 (93.6%); crude/condensate only. LNG force majeure declared separately"
-Bahrain and other,1.4,none,0.0,0.0,60,"Residual"
+country,hormuz_share_pct,bypass_pipeline,bypass_nameplate_mbd,bypass_spare_mbd,source_note
+Saudi Arabia,38.0,East-West (Petroline),5.0,3.5,"EIA (2024): Saudi Arabia = 38% of Hormuz crude+condensate, 5.5 mb/d. East-West nameplate 5.0 mb/d, pushed toward 7.0 during the crisis by converting NGL lines (S&P Global, 10 Mar 2026). Nameplate-optimistic spare 3.5; EIA puts REAL combined KSA+UAE deliverable spare at only 2.6 mb/d."
+Iraq,22.5,none,0.0,0.0,"Share is an ESTIMATE: EIA names only Saudi Arabia's share; non-Saudi splits approximate 2024 Gulf export volumes and are not individually published. No Gulf-connected bypass (Kirkuk-Ceyhan runs to the Mediterranean)."
+United Arab Emirates,12.7,ADCOP (Habshan-Fujairah),1.8,1.4,"EIA: ADCOP/Fujairah nameplate 1.8 mb/d; EIA calls real excess capacity only 'limited' (no figure). Share is an ESTIMATE. The 1.4 nameplate-optimistic spare is the naive infrastructure read the model deliberately tests."
+Iran,10.5,Goreh-Jask,0.3,0.0,"Share is an ESTIMATE. Goreh-Jask bypass ~0.3 mb/d nameplate but ran <0.07 mb/d in 2024 (EIA); treated as ~0 deliverable. Iran retained strait access as the controlling party."
+Kuwait,10.0,none,0.0,0.0,"Share is an ESTIMATE (see Iraq note). No bypass infrastructure."
+Qatar,4.9,none,0.0,0.0,"Share is an ESTIMATE (see Iraq note). Crude/condensate only; QatarEnergy declared LNG force majeure separately (LNG not modeled here)."
+Bahrain and other,1.4,none,0.0,0.0,"Residual ESTIMATE. No bypass."
