@@ -293,7 +293,7 @@
   </p>
   <p class="byline">
     Nayan Bhogaraju &nbsp;<span>/</span>&nbsp; Trade-flow analysis
-    &nbsp;<span>/</span>&nbsp; Data: EIA · IEA · Vortexa · NYT &nbsp;<span>/</span>&nbsp; 12 July 2026
+    &nbsp;<span>/</span>&nbsp; Data: EIA · FREE Network · CRS &nbsp;<span>/</span>&nbsp; 12 July 2026
   </p>
 
   <div class="soundings" id="soundings"></div>
@@ -347,16 +347,16 @@
   <p class="eyebrow">The model</p>
   <h2>Revenue is volume times price. Price did the rescuing.</h2>
   <p class="lede">
-    Brent ran at <strong>1.59×</strong> its pre-war level through the conflict window. That multiple sets a
+    Brent ran at <strong>1.67×</strong> its pre-war level through the conflict window. That multiple sets a
     single threshold the whole market shares: an exporter's revenue rises if, and only if, it still
-    moves more than <strong>P₀/P₁ = 62.9%</strong> of its pre-war barrels. Above the line, the price gain
+    moves more than <strong>P₀/P₁ ≈ 60%</strong> of its pre-war barrels. Above the line, the price gain
     outruns the volume loss. Below it, nothing saves you. Each exporter below is plotted twice — where its
     pipeline capacity said it <em>should</em> land, and where it actually landed.
   </p>
 
   <div class="chart-frame">
     <svg id="breakeven" viewBox="0 0 1080 400" role="img"
-         aria-label="Retention rate versus the 62.9% break-even line, by exporter"></svg>
+         aria-label="Retention rate versus the ~60% break-even line, by exporter"></svg>
   </div>
 
   <div class="legend">
@@ -368,7 +368,8 @@
   <div class="verdict">
     <p>
       Ranked by spare bypass capacity alone — a number knowable in 2024 — the model calls the
-      winner/loser split in <em>five of six</em> cases. Ranked by production scale, it calls none of them.
+      winner/loser split in <em>five of six</em> cases, and the structural retention rank-orders the
+      <em>size</em> of the revenue moves too (Spearman ρ = +0.87). Ranked by production scale, it calls none of them.
     </p>
   </div>
 </section>
@@ -401,9 +402,10 @@
   <div class="verdict">
     <p>
       The one miss <em>is</em> the finding. The UAE owns ADCOP, which on paper left it 76% retention —
-      comfortably above the line. It lost anyway, landing at 45%, because rated capacity is not
-      deliverable capacity. Any resilience estimate built off an infrastructure inventory will
-      overstate what a corridor can actually absorb.
+      comfortably above the line. It lost anyway, because rated capacity is not deliverable capacity:
+      EIA describes the UAE's real excess bypass as only <em>"limited."</em> The same wedge shrinks
+      corridor-wide deliverable spare to 2.6 mb/d against a 4.9 mb/d nameplate sum. Any resilience
+      estimate built off an infrastructure inventory will overstate what a corridor can actually absorb.
     </p>
   </div>
 </section>
@@ -413,9 +415,10 @@
   <p class="eyebrow">Price and transit, January – July 2026</p>
   <h2>The shock, and the truce that didn't hold</h2>
   <p class="lede">
-    Brent peaked at <strong>$116</strong> on 30 March. The 17 June memorandum of understanding brought it
-    back to pre-war levels within a fortnight. Then three merchant ships were struck on 7 July and
-    transits collapsed again — the current $76.58 sits on a corridor that is still, functionally, shut.
+    Brent crossed <strong>$100 on 8 March</strong> — its first time in four years — and peaked near
+    <strong>$126</strong>. The closure came in phases, not one clean arc: a US naval blockade ran
+    13 April – 29 May, a memorandum was signed 17 June, and Iran <strong>re-closed the strait on
+    20 June</strong>. The latest ~$76.58 sits on a corridor that is still, functionally, contested.
   </p>
   <div class="tl-frame">
     <svg id="timeline" viewBox="0 0 1080 340" role="img"
@@ -428,10 +431,11 @@
   <p class="eyebrow">The other side of the strait</p>
   <h2>Who is on the receiving end</h2>
   <p class="lede">
-    <strong>89.4%</strong> of Hormuz crude goes to Asia. Exposure below combines how much of a country's
+    <strong>84%</strong> of Hormuz crude goes to Asia (EIA). Exposure below combines how much of a country's
     crude arrives through the strait with how long its stockpile could replace those specific barrels.
     India scores near the top not because it is the most dependent, but because it holds
-    <strong>250 mb</strong> against China's 1,541.
+    <strong>250 mb</strong> against China's 1,541. Inventory levels here are unverified estimates, so the
+    index is illustrative rather than precise.
   </p>
   <div class="exp" id="exposure"></div>
   <div class="verdict">
@@ -455,8 +459,8 @@
         baseline, revenue rises iff <span class="mono">Q₁/Q₀ &gt; P₀/P₁</span>. The right-hand side is the
         break-even retention rate <span class="mono">r*</span>. With
         <span class="mono">P₀ = $64</span> (Feb 2026) and a time-weighted
-        <span class="mono">P₁ = $101.70</span> across 28 Feb – 8 May,
-        <span class="mono">r* = 62.9%</span>.
+        <span class="mono">P₁ = $106.94</span> across 28 Feb – 8 May,
+        <span class="mono">r* ≈ 59.8%</span>.
       </p>
       <p>
         Ex-ante retention is <span class="mono">spare bypass ÷ Hormuz volume</span>, capped at 1.
@@ -465,17 +469,22 @@
       </p>
     </div>
     <div class="note">
-      <h3>Limits</h3>
+      <h3>Limits &amp; how they're handled</h3>
       <ul>
-        <li>Partial equilibrium. Price is treated as exogenous to any single exporter, which is a
-            strong assumption for Saudi Arabia.</li>
-        <li>Revenue direction is directional only. The NYT reports signs for Gulf states, not
-            magnitudes, so the test is a sign test on six observations — suggestive, not powered.</li>
-        <li>Output-cut estimates are trade-press figures, not audited production data.</li>
-        <li>Crude and condensate only. LNG (Qatar's force majeure) and refined products move on
-            different economics and would change Qatar's picture.</li>
-        <li>Bypass "spare" capacity is the IEA's 3.5–5.5 mb/d range, midpoint-allocated. The UAE
-            result is sensitive to this allocation — which is precisely the point.</li>
+        <li>Partial equilibrium — price is exogenous to any single exporter (strong for Saudi Arabia).
+            Probed with a ±15% price sweep: the call holds; only exporters within a few points of the
+            line (Saudi, UAE) are sensitive.</li>
+        <li>Small sample. FREE Network published <em>magnitudes</em> for four exporters, so the test is
+            no longer sign-only: structural retention rank-orders the revenue moves (Spearman ρ = +0.87),
+            not just their sign. Still six observations — suggestive, not powered.</li>
+        <li>Realised retention is <em>derived</em> from reported revenue (Q₁/Q₀ = revenue index ÷ price
+            index), replacing the earlier guessed output cuts. Baseline caveat: the revenue window and the
+            price baseline differ slightly, so implied retention is indicative.</li>
+        <li>Crude and condensate only. LNG (~20% of world seaborne LNG, and Qatar's force majeure) moves
+            on different economics and is not modeled — it would change Qatar's picture.</li>
+        <li>Bypass spare uses EIA's real deliverable figure (2.6 mb/d combined), not a nameplate sum
+            (4.9). Individual country shares beyond Saudi Arabia, daily prices between dated events, and
+            importer inventories are flagged as estimates in each CSV, not presented as sourced fact.</li>
       </ul>
     </div>
   </div>
@@ -483,11 +492,13 @@
     <div class="note">
       <h3>Sources</h3>
       <ul>
-        <li>EIA — <em>Global Energy Security Data</em>, Q1 2026; Hormuz chokepoint briefs (Vortexa tanker tracking)</li>
-        <li>IEA — <em>Strait of Hormuz</em> factsheet; Oil Market Report, March 2026</li>
-        <li>New York Times — trade-flow analysis, war start to 8 May 2026</li>
+        <li>EIA — <em>Strait of Hormuz</em> chokepoint brief (2024): Saudi 38%/5.5 mb/d, 84% to Asia,
+            combined deliverable bypass 2.6 mb/d</li>
+        <li>Wikipedia — <em>2026 Strait of Hormuz crisis</em>: $100 on 8 Mar, ~$126 peak, closure phases</li>
+        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, and Vulnerabilities</em>, 20 Mar 2026
+            (revenue magnitudes)</li>
         <li>CRS — <em>Iran Conflict and the Strait of Hormuz</em> (R45281)</li>
-        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, Vulnerabilities</em>, March 2026</li>
+        <li>S&amp;P Global; Al Jazeera; NPR — pipeline capacity, prices, and the 17 Jun memorandum</li>
       </ul>
     </div>
     <div class="note">
@@ -512,394 +523,7 @@
 /* ══════════════════════════════════════════════════════════════════
    Data — emitted by analysis.py → output/results.json
    ══════════════════════════════════════════════════════════════════ */
-const R = {
-"meta": {
-"title": "The Hormuz Break-Even Line",
-"window": {
-"pre_war": "2026-02-15",
-"conflict": [
-"2026-02-28",
-"2026-05-08"
-]
-},
-"generated": "2026-07-12"
-},
-"headline": {
-"break_even_retention": 0.6293,
-"price_multiple": 1.589,
-"p0": 64.0,
-"p1": 101.7,
-"bypass_gap_mbd": 9.3,
-"bypass_cover": 0.3451,
-"hhi": 2311.0,
-"accuracy_exante": "5/6",
-"accuracy_expost": "6/6",
-"hormuz_crude_mbd": 14.2,
-"hormuz_total_mbd": 20.1,
-"asia_share": 0.8944
-},
-"exporters": [
-{
-"country": "Saudi Arabia",
-"hormuz_share_pct": 37.2,
-"hormuz_mbd": 5.2824,
-"bypass_pipeline": "East-West (Petroline)",
-"bypass_spare_mbd": 3.5,
-"structural_retention": 0.6625776162,
-"observed_retention": 0.8,
-"exante_index": 1.0528772433,
-"expost_index": 1.27125,
-"pred_exante": "up",
-"pred_expost": "up",
-"actual": "up",
-"hit_exante": true,
-"hit_expost": true
-},
-{
-"country": "Iraq",
-"hormuz_share_pct": 22.8,
-"hormuz_mbd": 3.2376,
-"bypass_pipeline": "none",
-"bypass_spare_mbd": 0.0,
-"structural_retention": 0.0,
-"observed_retention": 0.3,
-"exante_index": 0.0,
-"expost_index": 0.47671875,
-"pred_exante": "down",
-"pred_expost": "down",
-"actual": "down",
-"hit_exante": true,
-"hit_expost": true
-},
-{
-"country": "United Arab Emirates",
-"hormuz_share_pct": 12.9,
-"hormuz_mbd": 1.8318,
-"bypass_pipeline": "ADCOP (Habshan-Fujairah)",
-"bypass_spare_mbd": 1.4,
-"structural_retention": 0.7642755759,
-"observed_retention": 0.45,
-"exante_index": 1.2144816574,
-"expost_index": 0.715078125,
-"pred_exante": "up",
-"pred_expost": "down",
-"actual": "down",
-"hit_exante": false,
-"hit_expost": true
-},
-{
-"country": "Iran",
-"hormuz_share_pct": 10.6,
-"hormuz_mbd": 1.5052,
-"bypass_pipeline": "none",
-"bypass_spare_mbd": 0.0,
-"structural_retention": 1.0,
-"observed_retention": 1.0,
-"exante_index": 1.5890625,
-"expost_index": 1.5890625,
-"pred_exante": "up",
-"pred_expost": "up",
-"actual": "up",
-"hit_exante": true,
-"hit_expost": true
-},
-{
-"country": "Kuwait",
-"hormuz_share_pct": 10.1,
-"hormuz_mbd": 1.4342,
-"bypass_pipeline": "none",
-"bypass_spare_mbd": 0.0,
-"structural_retention": 0.0,
-"observed_retention": 0.4,
-"exante_index": 0.0,
-"expost_index": 0.635625,
-"pred_exante": "down",
-"pred_expost": "down",
-"actual": "down",
-"hit_exante": true,
-"hit_expost": true
-},
-{
-"country": "Qatar",
-"hormuz_share_pct": 5.0,
-"hormuz_mbd": 0.71,
-"bypass_pipeline": "none",
-"bypass_spare_mbd": 0.0,
-"structural_retention": 0.0,
-"observed_retention": 0.35,
-"exante_index": 0.0,
-"expost_index": 0.556171875,
-"pred_exante": "down",
-"pred_expost": "down",
-"actual": "down",
-"hit_exante": true,
-"hit_expost": true
-},
-{
-"country": "Bahrain and other",
-"hormuz_share_pct": 1.4,
-"hormuz_mbd": 0.1988,
-"bypass_pipeline": "none",
-"bypass_spare_mbd": 0.0,
-"structural_retention": 0.0,
-"observed_retention": 0.4,
-"exante_index": 0.0,
-"expost_index": 0.635625,
-"pred_exante": "down",
-"pred_expost": "down",
-"actual": null,
-"hit_exante": false,
-"hit_expost": false
-}
-],
-"destinations": [
-{
-"destination": "China",
-"region": "Asia",
-"hormuz_crude_mbd": 5.4,
-"share_of_own_crude_imports_pct": 47.0,
-"strategic_inventory_mb": 1541.0,
-"source_note": "EIA Q1-2025 destination flows; China net crude imports 11.5 mbd (2025); inventory EIA Global Energy Security Data Q1-2026"
-},
-{
-"destination": "India",
-"region": "Asia",
-"hormuz_crude_mbd": 2.1,
-"share_of_own_crude_imports_pct": 44.0,
-"strategic_inventory_mb": 250.0,
-"source_note": "EIA Q1-2025; India net crude imports ~4.8 mbd; inventory FREE Network Jan-2026"
-},
-{
-"destination": "South Korea",
-"region": "Asia",
-"hormuz_crude_mbd": 1.7,
-"share_of_own_crude_imports_pct": 70.0,
-"strategic_inventory_mb": null,
-"source_note": "EIA Q1-2025; ~70% of crude imports via Hormuz (ORF/Forbes). Inventory not in dataset"
-},
-{
-"destination": "Japan",
-"region": "Asia",
-"hormuz_crude_mbd": 1.6,
-"share_of_own_crude_imports_pct": 74.0,
-"strategic_inventory_mb": null,
-"source_note": "EIA Q1-2025; 70-74% of crude imports transit Hormuz. Inventory not in dataset"
-},
-{
-"destination": "Other Asia",
-"region": "Asia",
-"hormuz_crude_mbd": 1.9,
-"share_of_own_crude_imports_pct": null,
-"strategic_inventory_mb": null,
-"source_note": "Residual to reach 89.2% Asia share (Visual Capitalist/EIA)"
-},
-{
-"destination": "Europe",
-"region": "Europe",
-"hormuz_crude_mbd": 0.8,
-"share_of_own_crude_imports_pct": 8.0,
-"strategic_inventory_mb": 1285.0,
-"source_note": "EIA Q1-2025; OECD Europe inventory FREE Network Jan-2026"
-},
-{
-"destination": "United States",
-"region": "North America",
-"hormuz_crude_mbd": 0.4,
-"share_of_own_crude_imports_pct": 2.0,
-"strategic_inventory_mb": 1700.0,
-"source_note": "EIA: ~0.4-0.5 mbd, ~2% of US petroleum liquids consumption; SPR+commercial"
-},
-{
-"destination": "Other",
-"region": "Other",
-"hormuz_crude_mbd": 0.3,
-"share_of_own_crude_imports_pct": null,
-"strategic_inventory_mb": null,
-"source_note": "Residual"
-}
-],
-"exposure": [
-{
-"destination": "China",
-"share_of_own_crude_imports_pct": 47.0,
-"strategic_inventory_mb": 1541.0,
-"inventory_cover_days": 285.3703703704,
-"exposure": 98.3894972783
-},
-{
-"destination": "India",
-"share_of_own_crude_imports_pct": 44.0,
-"strategic_inventory_mb": 250.0,
-"inventory_cover_days": 119.0476190476,
-"exposure": 96.0
-},
-{
-"destination": "Europe",
-"share_of_own_crude_imports_pct": 8.0,
-"strategic_inventory_mb": 1285.0,
-"inventory_cover_days": 1606.25,
-"exposure": 33.5994236311
-},
-{
-"destination": "United States",
-"share_of_own_crude_imports_pct": 2.0,
-"strategic_inventory_mb": 1700.0,
-"inventory_cover_days": 4250.0,
-"exposure": 0.0
-}
-],
-"timeline": [
-{
-"date": "2026-01-15",
-"event": "Pre-war baseline",
-"brent_usd": 72.0,
-"hormuz_flow_mbd": 20.4,
-"source_note": "Q4-2025 Hormuz flows 20.7 mbd (EIA); Brent pre-war range"
-},
-{
-"date": "2026-02-15",
-"event": "Iran triples exports pre-emptively",
-"brent_usd": 64.0,
-"hormuz_flow_mbd": 20.5,
-"source_note": "Grand View: Brent avg $64/bbl Feb-2026; Iran surged exports 15-20 Feb"
-},
-{
-"date": "2026-02-28",
-"event": "US-Israel strikes begin (Op. Epic Fury)",
-"brent_usd": 78.0,
-"hormuz_flow_mbd": 14.0,
-"source_note": "Conflict start; ~90% of traffic diverted within days (Britannica)"
-},
-{
-"date": "2026-03-04",
-"event": "Iran declares strait closed",
-"brent_usd": 92.0,
-"hormuz_flow_mbd": 6.0,
-"source_note": "Traffic >95% diverted; CRS/Wikipedia"
-},
-{
-"date": "2026-03-17",
-"event": "Brent breaks $100",
-"brent_usd": 100.0,
-"hormuz_flow_mbd": 5.0,
-"source_note": "ORF America: Brent above $100 on 17 Mar"
-},
-{
-"date": "2026-03-30",
-"event": "Peak",
-"brent_usd": 116.0,
-"hormuz_flow_mbd": 4.5,
-"source_note": "Grand View: peak ~$116/bbl on 30 Mar"
-},
-{
-"date": "2026-04-15",
-"event": "IEA 400 mb emergency release absorbed",
-"brent_usd": 105.0,
-"hormuz_flow_mbd": 5.5,
-"source_note": "IEA released 400 mb from emergency stocks (11 Mar)"
-},
-{
-"date": "2026-05-08",
-"event": "NYT redistribution window closes",
-"brent_usd": 95.0,
-"hormuz_flow_mbd": 7.0,
-"source_note": "NYT trade-flow analysis window ends"
-},
-{
-"date": "2026-06-17",
-"event": "US-Iran memorandum of understanding",
-"brent_usd": 74.0,
-"hormuz_flow_mbd": 11.0,
-"source_note": "14-point MoU signed; strait reopening agreed"
-},
-{
-"date": "2026-07-03",
-"event": "Post-MoU normalisation",
-"brent_usd": 72.0,
-"hormuz_flow_mbd": 13.0,
-"source_note": "Brent returned to pre-war levels (Al Jazeera)"
-},
-{
-"date": "2026-07-07",
-"event": "Three merchant ships struck",
-"brent_usd": 79.0,
-"hormuz_flow_mbd": 6.5,
-"source_note": "Renewed hostilities; no large vessel transited with AIS on since 7 Jul"
-},
-{
-"date": "2026-07-10",
-"event": "Current",
-"brent_usd": 76.58,
-"hormuz_flow_mbd": 6.0,
-"source_note": "Al Jazeera: Brent $76.58 at 05:00 GMT, 10 Jul 2026"
-}
-],
-"redistribution": [
-{
-"country": "United States",
-"role": "Non-Gulf exporter",
-"revenue_change_usd_bn": 50.0,
-"direction_observed": "up",
-"source_note": "NYT analysis: war start to 8 May 2026 vs same period a year earlier"
-},
-{
-"country": "Russia",
-"role": "Non-Gulf exporter",
-"revenue_change_usd_bn": 15.0,
-"direction_observed": "up",
-"source_note": "NYT: steady exports, >$15bn revenue increase"
-},
-{
-"country": "Saudi Arabia",
-"role": "Gulf - has bypass",
-"revenue_change_usd_bn": null,
-"direction_observed": "up",
-"source_note": "NYT: revenue up via Red Sea pipeline re-routing despite export decline"
-},
-{
-"country": "Oman",
-"role": "Gulf - outside strait",
-"revenue_change_usd_bn": null,
-"direction_observed": "up",
-"source_note": "NYT: avoided bottleneck by geography"
-},
-{
-"country": "Iran",
-"role": "Gulf - controls strait",
-"revenue_change_usd_bn": null,
-"direction_observed": "up",
-"source_note": "NYT: retained strait access, revenue increased"
-},
-{
-"country": "Iraq",
-"role": "Gulf - no bypass",
-"revenue_change_usd_bn": null,
-"direction_observed": "down",
-"source_note": "NYT: revenue declined"
-},
-{
-"country": "Kuwait",
-"role": "Gulf - no bypass",
-"revenue_change_usd_bn": null,
-"direction_observed": "down",
-"source_note": "NYT: revenue declined"
-},
-{
-"country": "Qatar",
-"role": "Gulf - no bypass",
-"revenue_change_usd_bn": null,
-"direction_observed": "down",
-"source_note": "NYT: revenue declined; QatarEnergy force majeure"
-},
-{
-"country": "United Arab Emirates",
-"role": "Gulf - partial bypass",
-"revenue_change_usd_bn": null,
-"direction_observed": "down",
-"source_note": "NYT: revenue declined despite ADCOP"
-}
-]
-};
+const R = {"meta": {"title": "The Hormuz Break-Even Line", "window": {"pre_war": "2026-02-15", "conflict": ["2026-02-28", "2026-05-08"]}, "generated": "2026-07-12"}, "headline": {"break_even_retention": 0.5985, "price_multiple": 1.671, "p0": 64.0, "p1": 106.94, "bypass_gap_mbd": 11.9, "bypass_cover": 0.1793, "nameplate_spare_mbd": 4.9, "deliverable_spare_mbd": 2.6, "hhi": 2348.0, "accuracy_exante": "5/6", "accuracy_expost": "3/3", "hormuz_crude_mbd": 14.5, "hormuz_total_mbd": 20.0, "asia_share": 0.8414}, "exporters": [{"country": "Saudi Arabia", "hormuz_share_pct": 38.0, "hormuz_mbd": 5.51, "bypass_pipeline": "East-West (Petroline)", "bypass_nameplate_mbd": 5.0, "bypass_spare_mbd": 3.5, "structural_retention": 0.6352087114, "observed_retention": 0.6241838098, "revenue_change_pct": 4.3, "exante_index": 1.0614224138, "pred_exante": "up", "pred_expost": "up", "actual": "up", "hit_exante": true, "hit_expost": true}, {"country": "Iraq", "hormuz_share_pct": 22.5, "hormuz_mbd": 3.2625, "bypass_pipeline": "none", "bypass_nameplate_mbd": 0.0, "bypass_spare_mbd": 0.0, "structural_retention": 0.0, "observed_retention": 0.1436281058, "revenue_change_pct": -76.0, "exante_index": 0.0, "pred_exante": "down", "pred_expost": "down", "actual": "down", "hit_exante": true, "hit_expost": true}, {"country": "United Arab Emirates", "hormuz_share_pct": 12.7, "hormuz_mbd": 1.8415, "bypass_pipeline": "ADCOP (Habshan-Fujairah)", "bypass_nameplate_mbd": 1.8, "bypass_spare_mbd": 1.4, "structural_retention": 0.7602497964, "observed_retention": null, "revenue_change_pct": null, "exante_index": 1.2703638338, "pred_exante": "up", "pred_expost": null, "actual": "down", "hit_exante": false, "hit_expost": false}, {"country": "Iran", "hormuz_share_pct": 10.5, "hormuz_mbd": 1.5225, "bypass_pipeline": "Goreh-Jask", "bypass_nameplate_mbd": 0.3, "bypass_spare_mbd": 0.0, "structural_retention": 1.0, "observed_retention": null, "revenue_change_pct": null, "exante_index": 1.6709821429, "pred_exante": "up", "pred_expost": null, "actual": "up", "hit_exante": true, "hit_expost": false}, {"country": "Kuwait", "hormuz_share_pct": 10.0, "hormuz_mbd": 1.45, "bypass_pipeline": "none", "bypass_nameplate_mbd": 0.0, "bypass_spare_mbd": 0.0, "structural_retention": 0.0, "observed_retention": 0.161581619, "revenue_change_pct": -73.0, "exante_index": 0.0, "pred_exante": "down", "pred_expost": "down", "actual": "down", "hit_exante": true, "hit_expost": true}, {"country": "Qatar", "hormuz_share_pct": 4.9, "hormuz_mbd": 0.7105, "bypass_pipeline": "none", "bypass_nameplate_mbd": 0.0, "bypass_spare_mbd": 0.0, "structural_retention": 0.0, "observed_retention": null, "revenue_change_pct": null, "exante_index": 0.0, "pred_exante": "down", "pred_expost": null, "actual": "down", "hit_exante": true, "hit_expost": false}, {"country": "Bahrain and other", "hormuz_share_pct": 1.4, "hormuz_mbd": 0.203, "bypass_pipeline": "none", "bypass_nameplate_mbd": 0.0, "bypass_spare_mbd": 0.0, "structural_retention": 0.0, "observed_retention": null, "revenue_change_pct": null, "exante_index": 0.0, "pred_exante": "down", "pred_expost": null, "actual": null, "hit_exante": false, "hit_expost": false}], "destinations": [{"destination": "China", "region": "Asia", "hormuz_crude_mbd": 5.0, "share_of_own_crude_imports_pct": 47.0, "strategic_inventory_mb": 1541.0, "source_note": "EIA (2024): top-4 Asian buyers = 69% of Hormuz crude+condensate; 84% goes to Asia. Wikipedia: China receives ~a third of its oil via the strait. Per-country mb/d and 47% import share are ESTIMATES. Inventory figure UNVERIFIED."}, {"destination": "India", "region": "Asia", "hormuz_crude_mbd": 2.0, "share_of_own_crude_imports_pct": 44.0, "strategic_inventory_mb": 250.0, "source_note": "EIA (2024). Per-country split and 44% import share are ESTIMATES. Inventory figure UNVERIFIED."}, {"destination": "South Korea", "region": "Asia", "hormuz_crude_mbd": 1.6, "share_of_own_crude_imports_pct": 70.0, "strategic_inventory_mb": null, "source_note": "EIA (2024); ~70% of crude imports via Hormuz (widely reported). Inventory not published in this dataset."}, {"destination": "Japan", "region": "Asia", "hormuz_crude_mbd": 1.5, "share_of_own_crude_imports_pct": 74.0, "strategic_inventory_mb": null, "source_note": "EIA (2024); 70-74% of crude imports transit Hormuz. Inventory not published in this dataset."}, {"destination": "Other Asia", "region": "Asia", "hormuz_crude_mbd": 2.1, "share_of_own_crude_imports_pct": null, "strategic_inventory_mb": null, "source_note": "Residual so Asia reaches EIA's 84% of crude+condensate."}, {"destination": "Europe", "region": "Europe", "hormuz_crude_mbd": 0.8, "share_of_own_crude_imports_pct": 8.0, "strategic_inventory_mb": 1285.0, "source_note": "EIA (2024). Inventory figure UNVERIFIED."}, {"destination": "United States", "region": "North America", "hormuz_crude_mbd": 0.5, "share_of_own_crude_imports_pct": 7.0, "strategic_inventory_mb": 1700.0, "source_note": "EIA (2024): ~0.5 mb/d = 7% of US crude+condensate IMPORTS (NB: ~2% of total US petroleum-liquids CONSUMPTION -- a different base). Inventory ~1,700 mb likely reflects TOTAL US petroleum inventories, not SPR+commercial crude alone; UNVERIFIED for this use."}, {"destination": "Other", "region": "Other", "hormuz_crude_mbd": 1.0, "share_of_own_crude_imports_pct": null, "strategic_inventory_mb": null, "source_note": "Residual."}], "exposure": [{"destination": "China", "share_of_own_crude_imports_pct": 47.0, "strategic_inventory_mb": 1541.0, "inventory_cover_days": 308.2, "exposure": 97.7624427481}, {"destination": "India", "share_of_own_crude_imports_pct": 44.0, "strategic_inventory_mb": 250.0, "inventory_cover_days": 125.0, "exposure": 95.5}, {"destination": "Europe", "share_of_own_crude_imports_pct": 8.0, "strategic_inventory_mb": 1285.0, "inventory_cover_days": 1606.25, "exposure": 23.4083969466}, {"destination": "United States", "share_of_own_crude_imports_pct": 7.0, "strategic_inventory_mb": 1700.0, "inventory_cover_days": 3400.0, "exposure": 0.0}], "timeline": [{"date": "2026-01-15", "event": "Pre-war baseline", "brent_usd": 72.0, "hormuz_flow_mbd": 20.4, "source_note": "Pre-war Brent range; normal Hormuz flow ~20 mb/d total oil (EIA). Daily price INTERPOLATED between dated anchors."}, {"date": "2026-02-15", "event": "Pre-strike low", "brent_usd": 64.0, "hormuz_flow_mbd": 20.5, "source_note": "Feb 2026 pre-strike Brent low used as pre-war reference P0. Daily value approximate."}, {"date": "2026-02-28", "event": "US-Israel strikes begin (Op. Epic Fury)", "brent_usd": 78.0, "hormuz_flow_mbd": 14.0, "source_note": "Operation Epic Fury begins 28 Feb (confirmed). Traffic falls ~70% within days (Wikipedia). Price INTERPOLATED."}, {"date": "2026-03-04", "event": "Iran declares strait closed", "brent_usd": 90.0, "hormuz_flow_mbd": 7.0, "source_note": "Iran declared strait closed 4 Mar (CONFIRMED, Wikipedia/CRS R45281). Price INTERPOLATED toward the $100 crossing."}, {"date": "2026-03-08", "event": "Brent crosses $100", "brent_usd": 100.0, "hormuz_flow_mbd": 6.0, "source_note": "CONFIRMED: Brent surpassed $100 on 8 Mar for the first time in four years (Wikipedia)."}, {"date": "2026-03-27", "event": "IRGC formalises blockade", "brent_usd": 120.0, "hormuz_flow_mbd": 4.5, "source_note": "27 Mar: IRGC declares strait closed to vessels to/from US, Israel, allies (Wikipedia). Price INTERPOLATED toward peak."}, {"date": "2026-03-30", "event": "Peak", "brent_usd": 126.0, "hormuz_flow_mbd": 4.3, "source_note": "CONFIRMED: Brent peaked at ~$126/bbl (Wikipedia); largest-ever monthly oil price increase in Mar 2026. Exact peak date approximate."}, {"date": "2026-04-13", "event": "US naval blockade of Iran begins", "brent_usd": 110.0, "hormuz_flow_mbd": 5.0, "source_note": "US blockade on Iran-bound shipping 13 Apr - 29 May (Wikipedia). Price INTERPOLATED."}, {"date": "2026-05-08", "event": "FREE Network revenue window closes", "brent_usd": 98.0, "hormuz_flow_mbd": 7.0, "source_note": "End of the war window used for the FREE Network revenue comparison. Price INTERPOLATED."}, {"date": "2026-05-29", "event": "US blockade lifted", "brent_usd": 90.0, "hormuz_flow_mbd": 9.0, "source_note": "US blockade ends 29 May (Wikipedia). Price INTERPOLATED."}, {"date": "2026-06-17", "event": "US-Iran memorandum signed", "brent_usd": 78.0, "hormuz_flow_mbd": 11.0, "source_note": "CONFIRMED: Trump and Pezeshkian sign a memorandum at Versailles, 17 Jun (Wikipedia/NPR). Point-count of the deal not sourced. Price INTERPOLATED."}, {"date": "2026-06-20", "event": "Iran re-closes strait", "brent_usd": 84.0, "hormuz_flow_mbd": 7.0, "source_note": "CONFIRMED: Iran said it closed the strait again on 20 Jun (Wikipedia). The closure was multi-phase, not one continuous arc. Price INTERPOLATED."}, {"date": "2026-06-27", "event": "Widened transit route announced", "brent_usd": 80.0, "hormuz_flow_mbd": 9.0, "source_note": "27 Jun: Joint Maritime Information Center announces a widened route (Wikipedia). Price INTERPOLATED."}, {"date": "2026-07-10", "event": "Latest", "brent_usd": 76.58, "hormuz_flow_mbd": 9.5, "source_note": "Latest reported Brent for this snapshot (~$76.58). Flow partially recovered. Daily value approximate."}], "redistribution": [{"country": "United States", "role": "Non-Gulf exporter", "revenue_change_pct": null, "revenue_change_usd_bn": 50.0, "direction_observed": "up", "source_note": "FREE Network 'Hormuz Blockade: Winners, Losers, Vulnerabilities' (20 Mar 2026): US oil revenue up ~$50bn, war window vs year earlier."}, {"country": "Russia", "role": "Non-Gulf exporter", "revenue_change_pct": null, "revenue_change_usd_bn": 15.0, "direction_observed": "up", "source_note": "FREE Network (20 Mar 2026): steady exports, >$15bn revenue increase (6-11% of GDP)."}, {"country": "Saudi Arabia", "role": "Gulf - has bypass", "revenue_change_pct": 4.3, "revenue_change_usd_bn": null, "direction_observed": "up", "source_note": "FREE Network (20 Mar 2026): revenue +4.3% despite export decline, via East-West pipeline re-routing. Small gain is consistent with Saudi sitting just above the break-even line."}, {"country": "Oman", "role": "Gulf - outside strait", "revenue_change_pct": 26.0, "revenue_change_usd_bn": null, "direction_observed": "up", "source_note": "FREE Network (20 Mar 2026): revenue +26%; loads outside the strait, avoided the bottleneck entirely."}, {"country": "Iran", "role": "Gulf - controls strait", "revenue_change_pct": null, "revenue_change_usd_bn": null, "direction_observed": "up", "source_note": "FREE Network (20 Mar 2026): up (magnitude not independently confirmed this pass). Retained strait access as the controlling party."}, {"country": "Iraq", "role": "Gulf - no bypass", "revenue_change_pct": -76.0, "revenue_change_usd_bn": null, "direction_observed": "down", "source_note": "FREE Network (20 Mar 2026): revenue -76% (to ~$1.73bn). No bypass."}, {"country": "Kuwait", "role": "Gulf - no bypass", "revenue_change_pct": -73.0, "revenue_change_usd_bn": null, "direction_observed": "down", "source_note": "FREE Network (20 Mar 2026): revenue -73% (to ~$864mn). No bypass."}, {"country": "Qatar", "role": "Gulf - no bypass", "revenue_change_pct": null, "revenue_change_usd_bn": null, "direction_observed": "down", "source_note": "FREE Network (20 Mar 2026): down (crude magnitude not confirmed this pass); QatarEnergy declared LNG force majeure separately."}, {"country": "United Arab Emirates", "role": "Gulf - partial bypass", "revenue_change_pct": null, "revenue_change_usd_bn": null, "direction_observed": "down", "source_note": "FREE Network (20 Mar 2026): down (magnitude not confirmed this pass) despite owning ADCOP -- the model's one ex-ante miss."}]};
 
 const NS = "http://www.w3.org/2000/svg";
 const el = (t, a = {}) => {
@@ -907,7 +531,7 @@ const el = (t, a = {}) => {
   for (const k in a) n.setAttribute(k, a[k]);
   return n;
 };
-const pct = v => (v * 100).toFixed(0) + "%";
+const pct = v => (v == null || isNaN(v)) ? "—" : (v * 100).toFixed(0) + "%";
 
 /* ---------- soundings ---------- */
 const H = R.headline;
@@ -1096,26 +720,35 @@ draw("pre");
     nm.textContent = e.country.replace("United Arab Emirates", "UAE");
     svg.appendChild(nm);
 
-    /* the drift from rated to realised */
-    svg.appendChild(el("line", {
-      x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
-      stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
-      "stroke-width": e.hit_exante ? 1 : 2,
-      "stroke-dasharray": "3 3"
-    }));
+    const hasReal = e.observed_retention != null && !isNaN(e.observed_retention);
+
+    /* the drift from rated to realised — only where realised is known */
+    if (hasReal) {
+      svg.appendChild(el("line", {
+        x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
+        stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
+        "stroke-width": e.hit_exante ? 1 : 2,
+        "stroke-dasharray": "3 3"
+      }));
+    }
 
     /* rated (hollow) */
     svg.appendChild(el("circle", {
       cx: x(e.structural_retention), cy: yy, r: 5.5,
       fill: "none", stroke: "#7FA3B0", "stroke-width": 1.5
     }));
-    /* realised (filled) */
-    svg.appendChild(el("circle", { cx: x(e.observed_retention), cy: yy, r: 6, fill: col }));
+    /* realised (filled) — where reported. Otherwise mark the rated point by outcome colour. */
+    if (hasReal) {
+      svg.appendChild(el("circle", { cx: x(e.observed_retention), cy: yy, r: 6, fill: col }));
+    } else {
+      svg.appendChild(el("circle", { cx: x(e.structural_retention), cy: yy, r: 3, fill: col }));
+    }
 
+    /* the miss: UAE's rated point sits above the line, yet it lost */
     if (!e.hit_exante) {
       const m = el("text", { x: x(e.structural_retention) + 14, y: yy - 12, class: "lbl" });
       m.setAttribute("fill", "#E8A33D");
-      m.textContent = "rated 76% → realised 45%";
+      m.textContent = `rated ${pct(e.structural_retention)} · realised “limited” · lost`;
       svg.appendChild(m);
     }
   });
@@ -1169,9 +802,9 @@ document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actua
 
   const marks = {
     "2026-03-04": "strait declared closed",
-    "2026-03-30": "peak $116",
+    "2026-03-30": "peak $126",
     "2026-06-17": "MoU signed",
-    "2026-07-07": "ships struck"
+    "2026-06-20": "re-closed"
   };
   T.forEach(d => {
     svg.appendChild(el("circle", { cx: X(d.date), cy: YP(d.brent_usd), r: 3, fill: "#E8A33D" }));

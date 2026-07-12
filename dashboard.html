@@ -293,7 +293,7 @@
   </p>
   <p class="byline">
     Nayan Bhogaraju &nbsp;<span>/</span>&nbsp; Trade-flow analysis
-    &nbsp;<span>/</span>&nbsp; Data: EIA · IEA · Vortexa · NYT &nbsp;<span>/</span>&nbsp; 12 July 2026
+    &nbsp;<span>/</span>&nbsp; Data: EIA · FREE Network · CRS &nbsp;<span>/</span>&nbsp; 12 July 2026
   </p>
 
   <div class="soundings" id="soundings"></div>
@@ -347,16 +347,16 @@
   <p class="eyebrow">The model</p>
   <h2>Revenue is volume times price. Price did the rescuing.</h2>
   <p class="lede">
-    Brent ran at <strong>1.59×</strong> its pre-war level through the conflict window. That multiple sets a
+    Brent ran at <strong>1.67×</strong> its pre-war level through the conflict window. That multiple sets a
     single threshold the whole market shares: an exporter's revenue rises if, and only if, it still
-    moves more than <strong>P₀/P₁ = 62.9%</strong> of its pre-war barrels. Above the line, the price gain
+    moves more than <strong>P₀/P₁ ≈ 60%</strong> of its pre-war barrels. Above the line, the price gain
     outruns the volume loss. Below it, nothing saves you. Each exporter below is plotted twice — where its
     pipeline capacity said it <em>should</em> land, and where it actually landed.
   </p>
 
   <div class="chart-frame">
     <svg id="breakeven" viewBox="0 0 1080 400" role="img"
-         aria-label="Retention rate versus the 62.9% break-even line, by exporter"></svg>
+         aria-label="Retention rate versus the ~60% break-even line, by exporter"></svg>
   </div>
 
   <div class="legend">
@@ -368,7 +368,8 @@
   <div class="verdict">
     <p>
       Ranked by spare bypass capacity alone — a number knowable in 2024 — the model calls the
-      winner/loser split in <em>five of six</em> cases. Ranked by production scale, it calls none of them.
+      winner/loser split in <em>five of six</em> cases, and the structural retention rank-orders the
+      <em>size</em> of the revenue moves too (Spearman ρ = +0.87). Ranked by production scale, it calls none of them.
     </p>
   </div>
 </section>
@@ -401,9 +402,10 @@
   <div class="verdict">
     <p>
       The one miss <em>is</em> the finding. The UAE owns ADCOP, which on paper left it 76% retention —
-      comfortably above the line. It lost anyway, landing at 45%, because rated capacity is not
-      deliverable capacity. Any resilience estimate built off an infrastructure inventory will
-      overstate what a corridor can actually absorb.
+      comfortably above the line. It lost anyway, because rated capacity is not deliverable capacity:
+      EIA describes the UAE's real excess bypass as only <em>"limited."</em> The same wedge shrinks
+      corridor-wide deliverable spare to 2.6 mb/d against a 4.9 mb/d nameplate sum. Any resilience
+      estimate built off an infrastructure inventory will overstate what a corridor can actually absorb.
     </p>
   </div>
 </section>
@@ -413,9 +415,10 @@
   <p class="eyebrow">Price and transit, January – July 2026</p>
   <h2>The shock, and the truce that didn't hold</h2>
   <p class="lede">
-    Brent peaked at <strong>$116</strong> on 30 March. The 17 June memorandum of understanding brought it
-    back to pre-war levels within a fortnight. Then three merchant ships were struck on 7 July and
-    transits collapsed again — the current $76.58 sits on a corridor that is still, functionally, shut.
+    Brent crossed <strong>$100 on 8 March</strong> — its first time in four years — and peaked near
+    <strong>$126</strong>. The closure came in phases, not one clean arc: a US naval blockade ran
+    13 April – 29 May, a memorandum was signed 17 June, and Iran <strong>re-closed the strait on
+    20 June</strong>. The latest ~$76.58 sits on a corridor that is still, functionally, contested.
   </p>
   <div class="tl-frame">
     <svg id="timeline" viewBox="0 0 1080 340" role="img"
@@ -428,10 +431,11 @@
   <p class="eyebrow">The other side of the strait</p>
   <h2>Who is on the receiving end</h2>
   <p class="lede">
-    <strong>89.4%</strong> of Hormuz crude goes to Asia. Exposure below combines how much of a country's
+    <strong>84%</strong> of Hormuz crude goes to Asia (EIA). Exposure below combines how much of a country's
     crude arrives through the strait with how long its stockpile could replace those specific barrels.
     India scores near the top not because it is the most dependent, but because it holds
-    <strong>250 mb</strong> against China's 1,541.
+    <strong>250 mb</strong> against China's 1,541. Inventory levels here are unverified estimates, so the
+    index is illustrative rather than precise.
   </p>
   <div class="exp" id="exposure"></div>
   <div class="verdict">
@@ -455,8 +459,8 @@
         baseline, revenue rises iff <span class="mono">Q₁/Q₀ &gt; P₀/P₁</span>. The right-hand side is the
         break-even retention rate <span class="mono">r*</span>. With
         <span class="mono">P₀ = $64</span> (Feb 2026) and a time-weighted
-        <span class="mono">P₁ = $101.70</span> across 28 Feb – 8 May,
-        <span class="mono">r* = 62.9%</span>.
+        <span class="mono">P₁ = $106.94</span> across 28 Feb – 8 May,
+        <span class="mono">r* ≈ 59.8%</span>.
       </p>
       <p>
         Ex-ante retention is <span class="mono">spare bypass ÷ Hormuz volume</span>, capped at 1.
@@ -465,17 +469,22 @@
       </p>
     </div>
     <div class="note">
-      <h3>Limits</h3>
+      <h3>Limits &amp; how they're handled</h3>
       <ul>
-        <li>Partial equilibrium. Price is treated as exogenous to any single exporter, which is a
-            strong assumption for Saudi Arabia.</li>
-        <li>Revenue direction is directional only. The NYT reports signs for Gulf states, not
-            magnitudes, so the test is a sign test on six observations — suggestive, not powered.</li>
-        <li>Output-cut estimates are trade-press figures, not audited production data.</li>
-        <li>Crude and condensate only. LNG (Qatar's force majeure) and refined products move on
-            different economics and would change Qatar's picture.</li>
-        <li>Bypass "spare" capacity is the IEA's 3.5–5.5 mb/d range, midpoint-allocated. The UAE
-            result is sensitive to this allocation — which is precisely the point.</li>
+        <li>Partial equilibrium — price is exogenous to any single exporter (strong for Saudi Arabia).
+            Probed with a ±15% price sweep: the call holds; only exporters within a few points of the
+            line (Saudi, UAE) are sensitive.</li>
+        <li>Small sample. FREE Network published <em>magnitudes</em> for four exporters, so the test is
+            no longer sign-only: structural retention rank-orders the revenue moves (Spearman ρ = +0.87),
+            not just their sign. Still six observations — suggestive, not powered.</li>
+        <li>Realised retention is <em>derived</em> from reported revenue (Q₁/Q₀ = revenue index ÷ price
+            index), replacing the earlier guessed output cuts. Baseline caveat: the revenue window and the
+            price baseline differ slightly, so implied retention is indicative.</li>
+        <li>Crude and condensate only. LNG (~20% of world seaborne LNG, and Qatar's force majeure) moves
+            on different economics and is not modeled — it would change Qatar's picture.</li>
+        <li>Bypass spare uses EIA's real deliverable figure (2.6 mb/d combined), not a nameplate sum
+            (4.9). Individual country shares beyond Saudi Arabia, daily prices between dated events, and
+            importer inventories are flagged as estimates in each CSV, not presented as sourced fact.</li>
       </ul>
     </div>
   </div>
@@ -483,11 +492,13 @@
     <div class="note">
       <h3>Sources</h3>
       <ul>
-        <li>EIA — <em>Global Energy Security Data</em>, Q1 2026; Hormuz chokepoint briefs (Vortexa tanker tracking)</li>
-        <li>IEA — <em>Strait of Hormuz</em> factsheet; Oil Market Report, March 2026</li>
-        <li>New York Times — trade-flow analysis, war start to 8 May 2026</li>
+        <li>EIA — <em>Strait of Hormuz</em> chokepoint brief (2024): Saudi 38%/5.5 mb/d, 84% to Asia,
+            combined deliverable bypass 2.6 mb/d</li>
+        <li>Wikipedia — <em>2026 Strait of Hormuz crisis</em>: $100 on 8 Mar, ~$126 peak, closure phases</li>
+        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, and Vulnerabilities</em>, 20 Mar 2026
+            (revenue magnitudes)</li>
         <li>CRS — <em>Iran Conflict and the Strait of Hormuz</em> (R45281)</li>
-        <li>FREE Network — <em>The Hormuz Blockade: Winners, Losers, Vulnerabilities</em>, March 2026</li>
+        <li>S&amp;P Global; Al Jazeera; NPR — pipeline capacity, prices, and the 17 Jun memorandum</li>
       </ul>
     </div>
     <div class="note">
@@ -520,7 +531,7 @@ const el = (t, a = {}) => {
   for (const k in a) n.setAttribute(k, a[k]);
   return n;
 };
-const pct = v => (v * 100).toFixed(0) + "%";
+const pct = v => (v == null || isNaN(v)) ? "—" : (v * 100).toFixed(0) + "%";
 
 /* ---------- soundings ---------- */
 const H = R.headline;
@@ -709,26 +720,35 @@ draw("pre");
     nm.textContent = e.country.replace("United Arab Emirates", "UAE");
     svg.appendChild(nm);
 
-    /* the drift from rated to realised */
-    svg.appendChild(el("line", {
-      x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
-      stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
-      "stroke-width": e.hit_exante ? 1 : 2,
-      "stroke-dasharray": "3 3"
-    }));
+    const hasReal = e.observed_retention != null && !isNaN(e.observed_retention);
+
+    /* the drift from rated to realised — only where realised is known */
+    if (hasReal) {
+      svg.appendChild(el("line", {
+        x1: x(e.structural_retention), y1: yy, x2: x(e.observed_retention), y2: yy,
+        stroke: e.hit_exante ? "rgba(127,163,176,.35)" : "#E8A33D",
+        "stroke-width": e.hit_exante ? 1 : 2,
+        "stroke-dasharray": "3 3"
+      }));
+    }
 
     /* rated (hollow) */
     svg.appendChild(el("circle", {
       cx: x(e.structural_retention), cy: yy, r: 5.5,
       fill: "none", stroke: "#7FA3B0", "stroke-width": 1.5
     }));
-    /* realised (filled) */
-    svg.appendChild(el("circle", { cx: x(e.observed_retention), cy: yy, r: 6, fill: col }));
+    /* realised (filled) — where reported. Otherwise mark the rated point by outcome colour. */
+    if (hasReal) {
+      svg.appendChild(el("circle", { cx: x(e.observed_retention), cy: yy, r: 6, fill: col }));
+    } else {
+      svg.appendChild(el("circle", { cx: x(e.structural_retention), cy: yy, r: 3, fill: col }));
+    }
 
+    /* the miss: UAE's rated point sits above the line, yet it lost */
     if (!e.hit_exante) {
       const m = el("text", { x: x(e.structural_retention) + 14, y: yy - 12, class: "lbl" });
       m.setAttribute("fill", "#E8A33D");
-      m.textContent = "rated 76% → realised 45%";
+      m.textContent = `rated ${pct(e.structural_retention)} · realised “limited” · lost`;
       svg.appendChild(m);
     }
   });
@@ -782,9 +802,9 @@ document.querySelector("#tbl tbody").innerHTML = R.exporters.filter(e => e.actua
 
   const marks = {
     "2026-03-04": "strait declared closed",
-    "2026-03-30": "peak $116",
+    "2026-03-30": "peak $126",
     "2026-06-17": "MoU signed",
-    "2026-07-07": "ships struck"
+    "2026-06-20": "re-closed"
   };
   T.forEach(d => {
     svg.appendChild(el("circle", { cx: X(d.date), cy: YP(d.brent_usd), r: 3, fill: "#E8A33D" }));
